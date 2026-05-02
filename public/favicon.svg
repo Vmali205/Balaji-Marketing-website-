@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="favAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D32F2F" />
+      <stop offset="50%" stop-color="#E53935" />
+      <stop offset="100%" stop-color="#C62828" />
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" stroke="url(#favAccent)" stroke-width="3" fill="none" />
+  <circle cx="60" cy="60" r="50" fill="#1A1A1A" />
+  <ellipse cx="60" cy="68" rx="28" ry="12" fill="none" stroke="url(#favAccent)" stroke-width="2.5" />
+  <path d="M32 68 Q32 45 60 40 Q88 45 88 68" fill="none" stroke="url(#favAccent)" stroke-width="2.5" stroke-linecap="round" />
+  <ellipse cx="60" cy="40" rx="8" ry="3" fill="none" stroke="url(#favAccent)" stroke-width="2" />
+  <path d="M48 32 Q46 26 48 20" stroke="url(#favAccent)" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7" />
+  <path d="M60 30 Q58 24 60 18" stroke="url(#favAccent)" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7" />
+  <path d="M72 32 Q70 26 72 20" stroke="url(#favAccent)" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7" />
+</svg>

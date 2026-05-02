@@ -1,0 +1,144 @@
+import { useState, useEffect, useCallback } from 'react';
+import { getProducts } from '../utils/api';
+
+// Sample products for development (when no API is available)
+const SAMPLE_PRODUCTS = [
+  {
+    id: '1',
+    name: 'Premium Tri-Ply Kadai 24cm',
+    category: 'kadai',
+    image: '/images/categories/kadai.png',
+    sizes: ['20cm', '22cm', '24cm', '26cm'],
+    description: 'Professional-grade tri-ply stainless steel kadai with superior heat distribution and ergonomic handles.',
+    amazonLink: '',
+    createdAt: '2026-01-01T00:00:00Z',
+  },
+  {
+    id: '2',
+    name: 'Tri-Ply Fry Pan Classic',
+    category: 'fry-pan',
+    image: '/images/categories/fry-pan.png',
+    sizes: ['22cm', '24cm', '26cm'],
+    description: 'Non-stick tri-ply fry pan perfect for everyday cooking. Even heat distribution ensures perfect results.',
+    amazonLink: 'https://amazon.in/example',
+    createdAt: '2026-01-02T00:00:00Z',
+  },
+  {
+    id: '3',
+    name: 'Stainless Steel Sauce Pan',
+    category: 'sauce-pan',
+    image: '/images/categories/sauce-pan.png',
+    sizes: ['16cm', '18cm'],
+    description: 'Versatile sauce pan ideal for sauces, soups, and boiling. Features a comfortable cool-touch handle.',
+    amazonLink: '',
+    createdAt: '2026-01-03T00:00:00Z',
+  },
+  {
+    id: '4',
+    name: 'Deep Cook Pot 26cm',
+    category: 'cook-pots',
+    image: '/images/categories/cook-pots.png',
+    sizes: ['22cm', '24cm', '26cm', '28cm'],
+    description: 'Large capacity tri-ply cook pot for stews, biryanis, and bulk cooking. Heavy-duty construction.',
+    amazonLink: '',
+    createdAt: '2026-01-04T00:00:00Z',
+  },
+  {
+    id: '5',
+    name: 'Professional Wok 30cm',
+    category: 'wok',
+    image: '/images/categories/wok.png',
+    sizes: ['28cm', '30cm', '32cm'],
+    description: 'Restaurant-quality tri-ply wok with deep sides and flat bottom. Perfect for stir-frying.',
+    amazonLink: 'https://amazon.in/example-wok',
+    createdAt: '2026-01-05T00:00:00Z',
+  },
+  {
+    id: '6',
+    name: 'Universal Lid Set',
+    category: 'lids',
+    image: '/images/categories/lids.png',
+    sizes: ['20cm', '22cm', '24cm', '26cm'],
+    description: 'Tempered glass lids with stainless steel rim. Fits multiple cookware sizes with steam vent.',
+    amazonLink: '',
+    createdAt: '2026-01-06T00:00:00Z',
+  },
+  {
+    id: '7',
+    name: 'Mini Tadka Pan',
+    category: 'mini-series',
+    image: '/images/categories/mini-series.png',
+    sizes: ['12cm', '14cm'],
+    description: 'Compact tri-ply tadka pan for tempering spices. Premium build in a mini size.',
+    amazonLink: '',
+    createdAt: '2026-01-07T00:00:00Z',
+  },
+  {
+    id: '8',
+    name: 'Tri-Ply Kadai Deep 28cm',
+    category: 'kadai',
+    image: '',
+    sizes: ['24cm', '26cm', '28cm'],
+    description: 'Extra-deep kadai for family-size cooking. Three-layer construction for even heat.',
+    amazonLink: 'https://amazon.in/example-kadai',
+    createdAt: '2026-01-08T00:00:00Z',
+  },
+  {
+    id: '9',
+    name: 'Thermocolor Insulated Flask',
+    category: 'bottle-flasks',
+    image: '/images/products/bottle-1.png',
+    sizes: ['750ml'],
+    description: 'A sleek, premium double-wall insulated stainless steel water bottle. Dark brushed steel finish with subtle polished accents.',
+    amazonLink: '',
+    createdAt: '2026-04-23T00:00:00Z',
+  },
+  {
+    id: '10',
+    name: 'Premium Coffee Thermal Flask',
+    category: 'bottle-flasks',
+    image: '/images/products/bottle-2.png',
+    sizes: ['500ml'],
+    description: 'A premium stainless steel thermal flask for coffee or tea. Matte black finish with a metallic cup lid.',
+    amazonLink: 'https://amazon.in/example-flask',
+    createdAt: '2026-04-23T00:00:00Z',
+  },
+  {
+    id: '11',
+    name: 'Heavy-Duty Sports Bottle',
+    category: 'bottle-flasks',
+    image: '/images/products/bottle-3.png',
+    sizes: ['1000ml'],
+    description: 'A large, heavy-duty stainless steel insulated sports water bottle. Silver metallic finish, perfect for active lifestyles.',
+    amazonLink: '',
+    createdAt: '2026-04-23T00:00:00Z',
+  },
+];
+
+const useProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchProducts = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getProducts();
+      setProducts(data.products || data);
+    } catch (err) {
+      console.warn('API not available, using sample products:', err.message);
+      setProducts(SAMPLE_PRODUCTS);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  return { products, loading, error, refetch: fetchProducts };
+};
+
+export default useProducts;

@@ -1,0 +1,319 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  padding: 0.8rem 0;
+  transition: all var(--transition-default);
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.6rem 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-lg);
+  list-style: none;
+}
+
+.navLink {
+  position: relative;
+  font-weight: 600;
+  font-size: var(--font-size-small);
+  color: var(--color-text-primary); /* Dark for light hero */
+  transition: all var(--transition-fast);
+  letter-spacing: 0.03em;
+  padding: 0.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-transform: uppercase;
+}
+
+.navbar.scrolled .navLink {
+  color: var(--color-text-primary);
+}
+
+.navLink:hover,
+.navLink.active {
+  color: var(--color-accent);
+}
+
+.navbar.scrolled .navLink:hover,
+.navbar.scrolled .navLink.active {
+  color: var(--color-accent);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-default);
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+  width: 100%;
+}
+
+.navCta {
+  composes: btn btn-primary btn-sm from global;
+}
+
+/* ===== Products Dropdown ===== */
+.dropdownContainer {
+  position: relative;
+}
+
+.dropdownTrigger {
+  font-family: var(--font-body);
+}
+
+.dropdownTriggerWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.chevronBtn {
+  background: none;
+  border: none;
+  padding: 0.5rem 0 0.5rem 0.2rem;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast);
+}
+
+.navbar.scrolled .chevronBtn {
+  color: var(--color-text-primary);
+}
+
+.chevronBtn:hover {
+  color: var(--color-accent);
+}
+
+.chevron {
+  transition: transform var(--transition-default);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--color-surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  min-width: 480px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all var(--transition-default);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 14px;
+  height: 14px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+}
+
+.dropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdownGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.dropdownItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0.5rem;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dropdownItem:hover,
+.dropdownItemActive {
+  background: var(--color-surface-alt);
+  color: var(--color-accent);
+}
+
+.dropdownImgWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.dropdownItem:hover .dropdownImgWrap {
+  border-color: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.dropdownImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Mobile Menu ===== */
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 10;
+  background: none;
+  border: none;
+}
+
+.menuToggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  border-radius: 2px;
+  transition: all var(--transition-default);
+}
+
+.navbar.scrolled .menuToggle span {
+  background-color: var(--color-text-primary);
+}
+
+.menuToggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menuToggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobileMenu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: var(--z-navbar);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xl);
+  padding: 2rem;
+}
+
+.mobileMenu.open {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.mobileNavLink {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink.active {
+  color: var(--color-accent);
+}
+
+.mobileProductsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.mobileProductItem {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+  padding: 0.3rem 1rem;
+}
+
+.mobileProductItem:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+}
