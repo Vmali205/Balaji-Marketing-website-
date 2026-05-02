@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.npm-local
+.agents
+pdfminer_text.txt
+pdf_text.txt
+pdf_utf8.txt
