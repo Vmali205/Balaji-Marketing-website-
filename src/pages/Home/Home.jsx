@@ -84,8 +84,8 @@ const Home = () => {
               <div className={styles.heroImageWrapper}>
                 <div className={styles.heroImageGlow} />
                 <img 
-                  src="/images/hero/hero-pot.png" 
-                  alt="Premium Aurum Cookware" 
+                  src="/images/hero/hero-pot-cinematic.png" 
+                  alt="Premium Aurum Cookware Cinematic" 
                   className={styles.heroImg} 
                 />
               </div>
