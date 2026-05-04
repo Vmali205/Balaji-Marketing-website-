@@ -81,8 +81,13 @@ const Home = () => {
             </div>
 
             <AnimatedSection variant="blurReveal" delay={0.6} className={styles.heroImageCol}>
-              <div className={styles.heroImageWrapper} style={{ width: '100%', minHeight: '500px' }}>
-                <Hero3D />
+              <div className={styles.heroImageWrapper}>
+                <div className={styles.heroImageGlow} />
+                <img 
+                  src="/images/hero/hero-pot.png" 
+                  alt="Premium Aurum Cookware" 
+                  className={styles.heroImg} 
+                />
               </div>
             </AnimatedSection>
           </div>
