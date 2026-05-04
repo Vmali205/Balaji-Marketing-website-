@@ -70,40 +70,38 @@ const About = () => {
         </div>
       </section>
 
-      {/* Why Tri-Ply */}
-      <section className={`section ${styles.triPly}`}>
+      {/* Our Brands */}
+      <section className={`section ${styles.brands}`}>
         <div className="container">
           <AnimatedSection>
-            <h2 className="section-title">Why <span className="accent-text">Tri-Ply?</span></h2>
+            <h2 className="section-title">Our <span className="accent-text">Brands</span></h2>
             <div className="red-line" />
-            <p className="section-subtitle">Three precision-bonded layers work together for superior cooking performance.</p>
+            <p className="section-subtitle">Premium quality cookware under our trusted in-house brands.</p>
           </AnimatedSection>
-          <div className={styles.triPlyContent}>
-            <div className={styles.triPlyGrid}>
-              <AnimatedSection variant="slideRight" delay={0.2} className={styles.triPlyModel}>
-                <div className={styles.modelContainer}>
-                  <Hero3D height="100%" />
+          
+          <div className={styles.brandsGrid}>
+            <AnimatedSection variant="scale" delay={0.2}>
+              <div className={`glass-card ${styles.brandCard}`}>
+                <div className={styles.brandImageWrapper}>
+                  <img src="/images/vrm-brand.png" alt="VRM Brand" className={styles.brandImage} />
+                  <div className={styles.brandBadge}>Featured Brand</div>
                 </div>
-              </AnimatedSection>
-              
-              <div className={styles.layersWrapper}>
-                {[
-                  { cls: 'outer', letter: 'S', title: 'Stainless Steel (Outer)', desc: 'Magnetic layer for induction compatibility, extreme durability, and a premium finish.' },
-                  { cls: 'core', letter: 'A', title: 'Aluminum Core', desc: 'The hidden hero — rapid, even heat distribution from base to rim. No hot spots.' },
-                  { cls: 'inner', letter: 'S', title: 'Stainless Steel (Inner)', desc: 'Premium food-safe surface. Non-reactive with acidic foods and incredibly easy to clean.' },
-                ].map((l, i) => (
-                  <AnimatedSection key={i} variant="slideLeft" delay={i * 0.15}>
-                    <div className={`glass-card ${styles.layerHorizontal}`}>
-                      <div className={`${styles.layerCircle} ${styles[l.cls]}`}>{l.letter}</div>
-                      <div className={styles.layerContent}>
-                        <h4>{l.title}</h4>
-                        <p>{l.desc}</p>
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                ))}
+                <div className={styles.brandContent}>
+                  <div className={styles.brandInfo}>
+                    <h3>VRM Cookware</h3>
+                    <p>Experience the perfect blend of tradition and technology. Our VRM series features professional-grade tri-ply stainless steel designed for lifetime durability and superior heat control.</p>
+                  </div>
+                  <a 
+                    href="/VRM%20CATALOGUE.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={`btn btn-primary ${styles.catalogBtn}`}
+                  >
+                    View VRM Catalogue
+                  </a>
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
