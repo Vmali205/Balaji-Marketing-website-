@@ -169,7 +169,7 @@ const Home = () => {
                 desc: 'Over a decade of experience serving satisfied clients. Quality you can trust, service you can rely on.',
               },
             ].map((item, index) => (
-              <AnimatedSection key={index} variant="slideUp" delay={index * 0.1}>
+              <AnimatedSection key={index} variant="slideUp" delay={index * 0.1} className={styles.whyWrapper}>
                 <div className={`glass-card ${styles.whyCard}`}>
                   <div className={styles.whyIcon}>{item.icon}</div>
                   <h3>{item.title}</h3>
