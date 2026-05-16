@@ -8,7 +8,41 @@ import Hero3D from '../../components/Hero/Hero3D';
 import { CATEGORIES, WHATSAPP_LINK } from '../../utils/constants';
 import styles from './Home.module.css';
 
+const SHOP_VIDEOS = [
+  {
+    id: 'kadai',
+    title: 'Tri-Ply Kadai',
+    thumbnail: '/images/products/kadai-hero.png',
+    link: '/product/1',
+  },
+  {
+    id: 'fry-pan',
+    title: 'Premium Fry Pan',
+    thumbnail: '/images/products/fry-pan-hero.png',
+    link: '/product/2',
+  },
+  {
+    id: 'sauce-pan',
+    title: 'Sauce Pan Set',
+    thumbnail: '/images/products/sauce-pan-hero.png',
+    link: '/product/3',
+  },
+  {
+    id: 'cook-pots',
+    title: 'Cook Pots',
+    thumbnail: '/images/products/cook-pots-hero.png',
+    link: '/product/4',
+  },
+  {
+    id: 'wok',
+    title: 'Professional Wok',
+    thumbnail: '/images/products/wok-hero.png',
+    link: '/product/5',
+  },
+];
+
 const Home = () => {
+
   useEffect(() => {
     document.title = 'Balaji Marketing Vasai | Premium Tri-Ply Cookware Wholesale';
   }, []);
@@ -126,6 +160,37 @@ const Home = () => {
                     </div>
                   </div>
                 </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SHOP BY VIDEOS ===== */}
+      <section className={`section ${styles.shopByVideos}`}>
+        <div className="container">
+          <AnimatedSection variant="blurReveal" className="text-center">
+            <h2 className={styles.shopVideosTitle}>
+              SHOP BY VIDEOS
+            </h2>
+            <div className={styles.shopVideosTitleLine} />
+          </AnimatedSection>
+
+          <div className={styles.videoGrid}>
+            {SHOP_VIDEOS.map((video, index) => (
+              <AnimatedSection key={video.id} variant="slideUp" delay={index * 0.1}>
+                <div className={styles.videoCard}>
+                  <Link to={video.link} className={styles.videoThumbnail}>
+                    <img src={video.thumbnail} alt={video.title} />
+                    <div className={styles.videoOverlay} />
+                    <div className={styles.videoLabel}>
+                      <span>BALAJI</span>
+                    </div>
+                  </Link>
+                  <Link to={video.link} className={styles.shopNowBtn}>
+                    Shop Now
+                  </Link>
+                </div>
               </AnimatedSection>
             ))}
           </div>

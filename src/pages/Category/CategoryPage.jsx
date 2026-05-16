@@ -262,7 +262,7 @@ const CategoryProductCard = ({ product }) => {
 
   return (
     <div className={styles.productCard}>
-      <div className={styles.productImageWrap}>
+      <Link to={`/product/${product.id}`} className={styles.productImageWrap}>
         {image ? (
           <img src={image} alt={name} className={styles.productImage} loading="lazy" />
         ) : (
@@ -270,10 +270,12 @@ const CategoryProductCard = ({ product }) => {
             <ShoppingBag size={40} strokeWidth={1} />
           </div>
         )}
-      </div>
+      </Link>
 
       <div className={styles.productContent}>
-        <h3 className={styles.productName}>{name}</h3>
+        <Link to={`/product/${product.id}`}>
+          <h3 className={styles.productName}>{name}</h3>
+        </Link>
         {description && <p className={styles.productDesc}>{description}</p>}
 
         {sizes && sizes.length > 0 && (
@@ -285,6 +287,12 @@ const CategoryProductCard = ({ product }) => {
         )}
 
         <div className={styles.productActions}>
+          <Link
+            to={`/product/${product.id}`}
+            className={`btn btn-secondary ${styles.productBtn}`}
+          >
+            View Details
+          </Link>
           {amazonLink ? (
             <a
               href={amazonLink}
@@ -293,7 +301,7 @@ const CategoryProductCard = ({ product }) => {
               className={`btn btn-amazon ${styles.productBtn}`}
             >
               <ExternalLink size={14} />
-              View on Amazon
+              Amazon
             </a>
           ) : (
             <a
