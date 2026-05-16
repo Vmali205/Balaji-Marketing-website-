@@ -86,7 +86,7 @@ const Contact = () => {
       icon: <MapPin size={24} />,
       title: 'Our Location',
       value: COMPANY_INFO.address,
-      link: 'https://maps.google.com'
+      link: 'https://www.google.com/maps/search/Rashmi+Industrial+Estate+Gala+No+1+and+4+Ground+Floor+Vasai+Palghar+401202'
     }
   ];
 
@@ -265,8 +265,8 @@ const Contact = () => {
         <div className="container">
           <div className={styles.mapWrapper}>
              <iframe 
-               title="Google Maps"
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120562.13320211603!2d72.75253685!3d19.38379465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7aec0a4b41bef%3A0xbd1a4ca919d6a613!2sVasai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+               title="Balaji Marketing Vasai - Google Maps"
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d72.8052!3d19.3957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7aec0a4b41bef%3A0xbd1a4ca919d6a613!2sRashmi%20Industrial%20Estate%2C%20Vasai%2C%20Palghar%2C%20Maharashtra%20401202!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
                width="100%" 
                height="100%" 
                style={{ border: 0 }} 
