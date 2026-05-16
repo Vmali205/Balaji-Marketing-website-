@@ -553,6 +553,12 @@
     grid-template-columns: 1fr;
     gap: 3rem;
     text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .heroTextCol {
+    align-items: center;
+    text-align: center;
   }
 
   .heroSubtitle {
@@ -572,25 +578,74 @@
     max-width: 350px;
   }
 
+  .heroStats {
+    justify-content: center;
+  }
+
   .videoGrid {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
   }
+
+  .whyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ctaBanner {
+    margin: 0 1rem 3rem;
+    padding: 4rem 2rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 90px;
+    padding-bottom: 2rem;
+  }
+
+  .heroContent {
+    padding: 2rem 0;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .badge {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .badgeText {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+
   .heroStats {
-    gap: var(--gap-xl);
+    gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
   }
 
   .heroStats .stat h3 {
     font-size: var(--font-size-h3);
   }
 
+  .heroImageWrapper {
+    max-width: 280px;
+  }
+
   .catGrid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
@@ -599,59 +654,150 @@
   }
 
   .catContent {
-    padding: 1rem;
+    padding: 0.85rem;
   }
 
   .catName {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+  }
+
+  .catArrowWrap {
+    width: 32px;
+    height: 32px;
   }
 
   .videoGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-
-  .playBtn {
-    width: 50px;
-    height: 50px;
+    gap: 0.75rem;
   }
 
   .shopNowBtn {
-    padding: 0.6rem 1.5rem;
-    font-size: 0.8rem;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.7rem;
+    max-width: 160px;
+  }
+
+  .shopVideosTitle {
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+  }
+
+  .shopVideosTitleLine {
+    margin: 0 auto 2rem;
+  }
+
+  .videoLabel span {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .whyCard {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaBanner {
+    margin: 0 0.75rem 2rem;
+    padding: 3rem 1.5rem;
+    border-radius: var(--radius-xl);
+  }
+
+  .ctaBanner h2 {
+    font-size: var(--font-size-h3);
+  }
+
+  .ctaBanner p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .ctaBtns {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ctaIconBtn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding-top: 75px;
+  }
+
+  .heroContent {
+    padding: 1.5rem 0;
+  }
+
   .heroStats {
-    gap: var(--gap-lg);
+    gap: 1.5rem;
   }
 
   .heroActions {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+  }
+
+  .heroActions a {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
   }
 
   .catGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .catContent {
+    padding: 0.75rem;
+  }
+
+  .catName {
+    font-size: 0.78rem;
   }
 
   .videoGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
 
   .videoThumbnail {
     aspect-ratio: 9/13;
+    border-radius: var(--radius-md);
+  }
+
+  .videoCard {
+    gap: 0.6rem;
   }
 
   .shopNowBtn {
-    padding: 0.5rem 1.2rem;
-    font-size: 0.75rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.65rem;
+    max-width: 140px;
   }
 
   .shopVideosTitle {
-    font-size: 1.3rem;
-    letter-spacing: 0.1em;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+  }
+
+  .videoLabel {
+    top: 8px;
+    left: 8px;
+  }
+
+  .videoLabel span {
+    font-size: 0.5rem;
+    padding: 0.15rem 0.4rem;
   }
 }

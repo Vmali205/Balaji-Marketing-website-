@@ -536,11 +536,28 @@
     max-width: 500px;
     margin: 0 auto;
   }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
+  .page {
+    padding-top: 80px;
+  }
+
+  .breadcrumb {
+    padding: 0.75rem 0;
+  }
+
+  .breadcrumbInner {
+    font-size: 0.78rem;
+    gap: 0.35rem;
+  }
+
   .productSection {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
   }
 
   .gallery {
@@ -554,32 +571,104 @@
     overflow-x: auto;
     gap: 0.5rem;
     padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
   }
 
   .thumbnailBtn {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
   }
 
   .mainImageInner {
     padding: 1rem;
+    aspect-ratio: auto;
+    min-height: 280px;
   }
 
   .productTitle {
-    font-size: var(--font-size-h3);
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+
+  .sku {
+    font-size: 0.8rem;
+  }
+
+  .priceBlock {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .priceLabel {
+    font-size: 1.05rem;
+  }
+
+  .sizeOptions {
+    gap: 0.5rem;
+  }
+
+  .sizeBtn {
+    min-width: 48px;
+    height: 36px;
+    font-size: 0.8rem;
+    padding: 0 0.75rem;
+  }
+
+  .quantitySection {
+    margin-bottom: 1.5rem;
   }
 
   .actionButtons {
     flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .addToCartBtn,
+  .buyNowBtn {
+    padding: 0.9rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .descriptionSection {
+    padding: 0 0 3rem;
   }
 
   .descriptionCard {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .descriptionTitle {
+    font-size: 1.2rem;
+  }
+
+  .descriptionText {
+    font-size: 0.95rem;
   }
 
   .featuresList ul {
     grid-template-columns: 1fr;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .relatedImageWrap {
+    padding: 1rem;
+  }
+
+  .relatedInfo {
+    padding: 1rem;
+  }
+
+  .relatedInfo h4 {
+    font-size: 0.9rem;
+  }
+
+  .backSection {
+    padding: 1.5rem 0 3rem;
   }
 }
 
@@ -589,11 +678,63 @@
   }
 
   .breadcrumbInner {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+  }
+
+  .productSection {
+    padding: 1rem 0;
   }
 
   .thumbnailBtn {
-    width: 56px;
-    height: 56px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .mainImageInner {
+    min-height: 220px;
+    border-radius: var(--radius-lg);
+  }
+
+  .productTitle {
+    font-size: 1.3rem;
+  }
+
+  .sizeBtn {
+    min-width: 44px;
+    height: 34px;
+    font-size: 0.75rem;
+  }
+
+  .quantityBtn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .quantityValue {
+    width: 40px;
+    font-size: 0.9rem;
+  }
+
+  .addToCartBtn,
+  .buyNowBtn {
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .descriptionCard {
+    padding: 1.25rem 1rem;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .relatedInfo h4 {
+    font-size: 0.82rem;
+  }
+
+  .relatedCta {
+    font-size: 0.75rem;
   }
 }

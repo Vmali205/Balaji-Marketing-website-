@@ -465,37 +465,79 @@
     grid-column: 1 / -1;
     text-align: center;
   }
+
+  .productsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
   .hero {
-    min-height: 55vh;
-    padding-bottom: 3rem;
+    min-height: auto;
+    padding: 90px 0 3rem;
   }
 
   .heroTitle {
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-size: clamp(2rem, 8vw, 3.5rem);
   }
 
   .heroDescription {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .heroActions {
+    gap: 0.75rem;
+  }
+
+  .featuresStrip {
+    padding: 1.5rem 0;
   }
 
   .featuresGrid {
-    gap: 1rem;
+    gap: 0.75rem 1.5rem;
+    justify-content: flex-start;
   }
 
   .featureItem {
     font-size: var(--font-size-xs);
+    white-space: normal;
+  }
+
+  .featureIcon {
+    width: 28px;
+    height: 28px;
   }
 
   .productsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .productContent {
+    padding: 1.25rem;
+  }
+
+  .productName {
+    font-size: 1.1rem;
+  }
+
+  .productActions {
+    flex-wrap: wrap;
+  }
+
+  .productBtn {
+    font-size: 0.7rem !important;
+    padding: 0.5rem 0.75rem !important;
   }
 
   .catNavInner {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .catNavLink {
+    padding: 0.85rem 1.25rem;
   }
 
   .catNavRight {
@@ -504,29 +546,80 @@
   }
 
   .ctaCard {
-    padding: 3rem 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .ctaCard h2 {
+    font-size: var(--font-size-h3);
   }
 
   .sizesGrid {
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .sizeCard {
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
   }
 
   .sizeValue {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+  }
+
+  .emptyState {
+    padding: 3rem 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .productsGrid {
-    grid-template-columns: 1fr;
+  .hero {
+    padding: 75px 0 2rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
   }
 
   .heroActions {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .heroActions a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .productsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .productActions {
+    flex-direction: column;
+  }
+
+  .productBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sizeCard {
+    width: 75px;
+    height: 75px;
+  }
+
+  .sizeValue {
+    font-size: 1.1rem;
+  }
+
+  .ctaActions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ctaActions a {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
   }
 }
