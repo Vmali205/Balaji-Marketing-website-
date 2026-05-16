@@ -82,7 +82,7 @@ export const COMPANY_INFO = {
   tagline: 'Premium Tri-Ply Cookware',
   phone: '+91 8754408847',
   email: 'info@balajimarketingvasai.com',
-  address: 'Rashmi Industrial Estate, Gala No. 1 & 4, Ground Floor, Vasai, Palghar 401202',
+  address: 'Ground Floor, Gala No. 1 & 4, Rashmi Industrial Estate, Navghar Manikpur, Samarth Krupa Nagar, Vasai East, Vasai-Virar, Maharashtra 401202',
   whatsapp: WHATSAPP_NUMBER,
 };
 
