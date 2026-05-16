@@ -266,7 +266,7 @@ const Contact = () => {
           <div className={styles.mapWrapper}>
              <iframe 
                title="Balaji Marketing Vasai - Google Maps"
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d72.8052!3d19.3957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7aec0a4b41bef%3A0xbd1a4ca919d6a613!2sRashmi%20Industrial%20Estate%2C%20Vasai%2C%20Palghar%2C%20Maharashtra%20401202!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+               src="https://maps.google.com/maps?q=Rashmi+Industrial+Estate,+Gala+No+1+and+4,+Vasai,+Palghar+401202&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                width="100%" 
                height="100%" 
                style={{ border: 0 }} 
