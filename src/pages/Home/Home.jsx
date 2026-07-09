@@ -313,7 +313,7 @@ const Home = () => {
           ) : (
             <div className={styles.featuredGrid}>
               {featuredProducts.map((product, index) => (
-                <AnimatedSection key={product.id} variant="slideUp" delay={index * 0.09}>
+                <AnimatedSection key={product.id} variant="slideUp" delay={index * 0.09} style={{ height: '100%' }}>
                   <ProductCard product={product} />
                 </AnimatedSection>
               ))}

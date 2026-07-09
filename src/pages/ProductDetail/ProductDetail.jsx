@@ -367,7 +367,7 @@ const ProductDetail = () => {
 
             <div className={styles.relatedGrid}>
               {relatedProducts.map((rp, i) => (
-                <AnimatedSection key={rp.id} variant="slideUp" delay={i * 0.1}>
+                <AnimatedSection key={rp.id} variant="slideUp" delay={i * 0.1} style={{ height: '100%' }}>
                   <Link to={`/product/${rp.id}`} className={styles.relatedCard}>
                     <div className={styles.relatedImageWrap}>
                       {rp.image ? (
