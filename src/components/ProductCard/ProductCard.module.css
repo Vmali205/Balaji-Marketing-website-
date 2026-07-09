@@ -27,7 +27,7 @@
 .imageWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
   display: block;
