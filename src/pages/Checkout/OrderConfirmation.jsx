@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { CheckCircle2, ShoppingBag, ArrowRight, Package, Truck } from 'lucide-react';
+import { CheckCircle2, ShoppingBag, ArrowRight, Package, Truck, MessageCircle, Mail } from 'lucide-react';
 import { SHIPPING_CONFIG } from '../../utils/constants';
 import styles from './Checkout.module.css';
 
@@ -16,6 +16,27 @@ const OrderConfirmation = () => {
       if (saved) setOrder(JSON.parse(saved));
     } catch { /* ignore */ }
   }, []);
+
+  const generateOrderText = () => {
+    if (!order) return '';
+    let text = `*New Order: ${order.id}*\n\n`;
+    text += `*Customer Details:*\n`;
+    text += `Name: ${order.customer?.name}\n`;
+    text += `Phone: ${order.customer?.phone}\n`;
+    text += `Email: ${order.customer?.email}\n\n`;
+    text += `*Shipping Address:*\n`;
+    text += `${order.shipping?.address}, ${order.shipping?.city}, ${order.shipping?.state} - ${order.shipping?.pincode}\n\n`;
+    text += `*Order Items:*\n`;
+    order.items.forEach(item => {
+      text += `- ${item.name} ${item.size ? `(Size: ${item.size})` : ''} x ${item.quantity}\n`;
+    });
+    text += `\n*Payment Method:* ${order.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Paid'}\n`;
+    text += `*Total Amount:* ₹${order.total}\n`;
+    return text;
+  };
+
+  const whatsappUrl = `https://wa.me/918754408847?text=${encodeURIComponent(generateOrderText())}`;
+  const emailUrl = `mailto:balajimarketing.mumbai@gmail.com?subject=New Order ${order?.id}&body=${encodeURIComponent(generateOrderText())}`;
 
   return (
     <motion.main
@@ -127,14 +148,29 @@ const OrderConfirmation = () => {
             </div>
           </motion.div>
         )}
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
           style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}
         >
-          <Link to="/catalogue" className="btn btn-primary btn-lg">
+          <div style={{ width: '100%', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center' }}>
+            <p style={{ color: 'var(--color-text-primary)', fontWeight: 600, margin: '0 0 0.5rem 0' }}>
+              Please send your order details to us to confirm:
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-lg">
+                <MessageCircle size={18} />
+                Send via WhatsApp
+              </a>
+              <a href={emailUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg" style={{ background: '#D32F2F', borderColor: '#D32F2F', color: '#fff' }}>
+                <Mail size={18} />
+                Send via Email
+              </a>
+            </div>
+          </div>
+
+          <Link to="/catalogue" className="btn btn-outline btn-lg">
             <ShoppingBag size={18} />
             Continue Shopping
           </Link>
