@@ -27,3 +27,9 @@ dist-ssr
 pdfminer_text.txt
 pdf_text.txt
 pdf_utf8.txt
+
+# Local Node.js runtime / binary folder
+React.js/
+*.exe
+*.dll
+*.bat
