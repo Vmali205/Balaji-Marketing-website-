@@ -1,128 +1,99 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { ArrowRight, Award, Truck, Shield, Users, MessageCircle, Sparkles, Package, Camera, Star } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import {
+  ArrowRight, Award, Truck, Shield, Users, MessageCircle,
+  Star, Package, ChevronRight, CheckCircle, Zap, Tag
+} from 'lucide-react';
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import AnimatedCounter from '../../components/AnimatedCounter/AnimatedCounter';
-import HeroCanvas from '../../components/HeroCanvas/HeroCanvas';
 import Marquee from '../../components/Marquee/Marquee';
-import { CATEGORIES, WHATSAPP_LINK } from '../../utils/constants';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import useProducts from '../../hooks/useProducts';
+import { CATEGORIES, WHATSAPP_LINK, TESTIMONIALS } from '../../utils/constants';
 import styles from './Home.module.css';
 
-const SHOP_VIDEOS = [
-  {
-    id: 'kadai',
-    title: 'Tri-Ply Kadai',
-    thumbnail: '/images/products/kadai-hero.png',
-    video: '/videos/kadai.mp4',
-    link: '/product/1',
-  },
-  {
-    id: 'fry-pan',
-    title: 'Premium Fry Pan',
-    thumbnail: '/images/products/fry-pan-hero.png',
-    video: '/videos/fry-pan.mp4',
-    link: '/product/2',
-  },
-  {
-    id: 'sauce-pan',
-    title: 'Sauce Pan Set',
-    thumbnail: '/images/products/sauce-pan-hero.png',
-    video: '/videos/sauce-pan.mp4',
-    link: '/product/3',
-  },
-  {
-    id: 'cook-pots',
-    title: 'Cook Pots',
-    thumbnail: '/images/products/cook-pots-hero.png',
-    video: '/videos/cook-pots.mp4',
-    link: '/product/4',
-  },
-  {
-    id: 'wok',
-    title: 'Professional Wok',
-    thumbnail: '/images/products/wok-hero.png',
-    video: '/videos/wok.mp4',
-    link: '/product/5',
-  },
-];
-
 const MARQUEE_ITEMS = [
-  'Premium Cookware',
-  'Tri-Ply Stainless Steel',
+  'Premium Tri-Ply Cookware',
   'Wholesale Pricing',
   'Pan-India Delivery',
   'Trusted Since 2015',
-  'B2B Partners',
+  'B2B Partners Welcome',
   'Professional Grade',
-  'Built to Last',
+  'ISI Certified',
+  'Induction Compatible',
 ];
 
-// Stagger animation variants for children
+const WHY_ITEMS = [
+  {
+    icon: <Award size={22} />,
+    title: 'Premium Quality',
+    desc: 'Tri-ply stainless steel for superior heat distribution and durability.',
+  },
+  {
+    icon: <Users size={22} />,
+    title: 'Wholesale Pricing',
+    desc: 'Best bulk pricing for retailers, distributors, and businesses.',
+  },
+  {
+    icon: <Truck size={22} />,
+    title: 'Pan-India Delivery',
+    desc: 'Reliable shipping across India with secure packaging.',
+  },
+  {
+    icon: <Shield size={22} />,
+    title: 'Trusted Since 2015',
+    desc: 'Over a decade of experience with 500+ satisfied B2B clients.',
+  },
+];
+
+const PROMO_BANNERS = [
+  {
+    id: 'new-arrivals',
+    label: 'New In Collection',
+    title: 'Tri-Ply Kadai',
+    subtitle: 'Professional Series',
+    cta: 'Shop Now',
+    link: '/products/kadai',
+    image: '/images/products/kadai-hero.png',
+    bg: 'linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%)',
+    accent: '#C62828',
+  },
+  {
+    id: 'sale',
+    label: 'Up to 20% OFF',
+    title: 'Cooking Made Easy',
+    subtitle: 'Fry Pans & Woks',
+    cta: 'Explore Deals',
+    link: '/products/fry-pan',
+    image: '/images/products/fry-pan-hero.png',
+    bg: 'linear-gradient(135deg, #8B0000 0%, #C62828 100%)',
+    accent: '#FFE082',
+  },
+];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
   },
 };
 
 const childVariants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
-};
-
-const floatVariants = {
-  hidden: { opacity: 0, scale: 0.85, y: 40 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 1,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
-
-// Parallax section wrapper
-const ParallaxSection = ({ children, className, offset = 50 }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
-
-  return (
-    <motion.div ref={ref} style={{ y }} className={className}>
-      {children}
-    </motion.div>
-  );
 };
 
 const Home = () => {
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
-
-  const { scrollYProgress: heroScrollProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-  const heroImageY = useTransform(heroScrollProgress, [0, 1], [0, -80]);
-  const heroTextY = useTransform(heroScrollProgress, [0, 1], [0, 40]);
-  const heroOpacity = useTransform(heroScrollProgress, [0, 0.5], [1, 0.3]);
+  const { products, loading: productsLoading } = useProducts();
+  const featuredProducts = products.slice(0, 4);
 
   useEffect(() => {
     document.title = 'Balaji Marketing Vasai | Premium Tri-Ply Cookware Wholesale';
@@ -133,191 +104,158 @@ const Home = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.25 }}
     >
-      {/* ===== HERO ===== */}
-      <section className={styles.hero} ref={heroRef}>
-        <HeroCanvas />
-        <div className={styles.heroBackground}>
-          <div className={styles.heroBgGlow1} />
-          <div className={styles.heroBgGlow2} />
-          <div className={styles.heroGrid} />
-          {/* Animated floating orbs */}
-          <div className={styles.floatingOrb1} />
-          <div className={styles.floatingOrb2} />
-          <div className={styles.floatingOrb3} />
+      {/* ===== HERO SECTION ===== */}
+      <section className={styles.hero} ref={heroRef} id="hero-section">
+        {/* Subtle background pattern */}
+        <div className={styles.heroBg}>
+          <div className={styles.heroDotGrid} />
+          <div className={styles.heroAccentBlob1} />
+          <div className={styles.heroAccentBlob2} />
+          <div className={styles.heroAccentBlob3} />
         </div>
 
         <div className="container">
           <div className={styles.heroContent}>
+            {/* LEFT: Text column */}
             <motion.div
               className={styles.heroTextCol}
-              style={{ y: heroTextY, opacity: heroOpacity }}
               variants={containerVariants}
               initial="hidden"
               animate={heroInView ? 'visible' : 'hidden'}
             >
-              <motion.div variants={childVariants}>
-                <div className={styles.badge}>
-                  <Sparkles size={14} />
-                  <span className={styles.badgeText}>Trusted Wholesale Partner Since 2015</span>
-                  <span className={styles.badgeShimmer} />
-                </div>
+              <motion.div variants={childVariants} className={styles.heroPill}>
+                <Zap size={12} fill="currentColor" />
+                <span>Trusted Wholesale Partner Since 2015</span>
               </motion.div>
 
               <motion.h1 variants={childVariants} className={styles.heroTitle}>
-                Premium <span>Cookware</span> <br />
-                for Your Business
+                Premium <span className={styles.heroTitleAccent}>Tri-Ply</span><br />
+                Cookware for<br />
+                <span className={styles.heroTitleAccent}>Your Business</span>
               </motion.h1>
 
               <motion.p variants={childVariants} className={styles.heroSubtitle}>
-                Elevate your culinary offerings with our professional-grade stainless steel cookware. 
-                Built for performance, designed for durability — available at competitive wholesale prices.
+                Professional-grade stainless steel cookware built for performance, 
+                designed for durability — at competitive wholesale prices.
               </motion.p>
 
+              <motion.div variants={childVariants} className={styles.heroChecks}>
+                {['ISI Certified Quality', 'Induction Compatible', 'Pan-India Delivery'].map((item) => (
+                  <div key={item} className={styles.heroCheck}>
+                    <CheckCircle size={14} />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </motion.div>
+
               <motion.div variants={childVariants} className={styles.heroActions}>
-                <Link to="/catalogue" className="btn btn-primary btn-lg">
-                  <span className={styles.btnShine} />
-                  Browse Collection
-                  <ArrowRight size={18} />
+                <Link to="/products" className="btn btn-primary btn-lg" id="hero-shop-btn">
+                  Shop Collection
+                  <ArrowRight size={16} />
                 </Link>
-                <a
-                  href={`${WHATSAPP_LINK}?text=${encodeURIComponent('Hi, I want to inquire about wholesale cookware pricing.')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline btn-lg"
-                >
-                  <MessageCircle size={18} />
-                  Get Quote
-                </a>
+                <Link to="/catalogue" className={`btn btn-outline btn-lg ${styles.heroOutlineBtn}`} id="hero-catalogue-btn">
+                  View Catalogue
+                </Link>
               </motion.div>
 
               <motion.div variants={childVariants} className={styles.heroStats}>
                 <div className={styles.stat}>
-                  <h3>
-                    <AnimatedCounter target={50} suffix="+" />
-                  </h3>
-                  <p>Product SKU's</p>
+                  <span className={styles.statNum}><AnimatedCounter target={50} suffix="+" /></span>
+                  <span className={styles.statLabel}>Product SKUs</span>
                 </div>
                 <div className={styles.statDivider} />
                 <div className={styles.stat}>
-                  <h3>
-                    <AnimatedCounter target={500} suffix="+" duration={2500} />
-                  </h3>
-                  <p>B2B Partners</p>
+                  <span className={styles.statNum}><AnimatedCounter target={500} suffix="+" duration={2500} /></span>
+                  <span className={styles.statLabel}>B2B Partners</span>
                 </div>
                 <div className={styles.statDivider} />
                 <div className={styles.stat}>
-                  <h3>
-                    <AnimatedCounter target={10} suffix="+" duration={1500} />
-                  </h3>
-                  <p>Years Exp.</p>
+                  <span className={styles.statNum}><AnimatedCounter target={10} suffix="+" duration={1500} /></span>
+                  <span className={styles.statLabel}>Years Exp.</span>
                 </div>
               </motion.div>
             </motion.div>
 
+            {/* RIGHT: Image column */}
             <motion.div
               className={styles.heroImageCol}
-              style={{ y: heroImageY }}
-              variants={floatVariants}
-              initial="hidden"
-              animate={heroInView ? 'visible' : 'hidden'}
+              initial={{ opacity: 0, x: 50, scale: 0.95 }}
+              animate={heroInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             >
-              <div className={styles.heroImageWrapper}>
-                <div className={styles.heroImageGlow} />
-                <div className={styles.heroImageRing} />
-                <img 
-                  src="/images/hero/hero-pot-cinematic.png" 
-                  alt="Premium Aurum Cookware Cinematic" 
-                  className={styles.heroImg} 
+              <div className={styles.heroImageFrame}>
+                <div className={styles.heroImageBg} />
+                <img
+                  src="/images/hero/hero-pot-cinematic.png"
+                  alt="Premium Balaji Tri-Ply Cookware"
+                  className={styles.heroImg}
                 />
-                {/* Floating mini badges around the image */}
+                {/* Floating stat cards */}
                 <motion.div
-                  className={`${styles.floatingBadge} ${styles.floatingBadge1}`}
-                  animate={{
-                    y: [0, -12, 0],
-                    rotate: [0, 5, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
+                  className={`${styles.floatCard} ${styles.floatCard1}`}
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                  <Star size={14} />
-                  <span>Premium</span>
+                  <div className={styles.floatCardIcon}><Star size={14} fill="currentColor" /></div>
+                  <div>
+                    <div className={styles.floatCardVal}>4.9/5</div>
+                    <div className={styles.floatCardLbl}>Avg Rating</div>
+                  </div>
                 </motion.div>
                 <motion.div
-                  className={`${styles.floatingBadge} ${styles.floatingBadge2}`}
-                  animate={{
-                    y: [0, 10, 0],
-                    rotate: [0, -3, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: 1,
-                  }}
+                  className={`${styles.floatCard} ${styles.floatCard2}`}
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                 >
-                  <Shield size={14} />
-                  <span>Tri-Ply</span>
+                  <div className={styles.floatCardIcon}><Shield size={14} /></div>
+                  <div>
+                    <div className={styles.floatCardVal}>3-Layer</div>
+                    <div className={styles.floatCardLbl}>Tri-Ply Steel</div>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className={styles.scrollIndicator}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.6 }}
-        >
-          <motion.div
-            className={styles.scrollDot}
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </motion.div>
       </section>
 
-      {/* ===== MARQUEE DIVIDER ===== */}
+      {/* ===== TRUST MARQUEE ===== */}
       <Marquee items={MARQUEE_ITEMS} speed={30} separator="✦" />
 
-      {/* ===== CATEGORIES ===== */}
-      <section className={`section ${styles.categories}`}>
+      {/* ===== CATEGORIES SECTION ===== */}
+      <section className={`section ${styles.categories}`} id="categories-section">
         <div className="container">
           <AnimatedSection variant="blurReveal" className="text-center">
-            <div className={styles.badge} style={{ margin: '0 auto 1.5rem' }}>
-              <Package size={14} />
-              <span className={styles.badgeText}>Premium Collection</span>
-            </div>
+            <p className="section-label">Our Collection</p>
             <h2 className="section-title">
-              Explore Our <span className="accent-text">Categories</span>
+              Shop by <span className="accent-text">Category</span>
             </h2>
             <div className="red-line" />
             <p className="section-subtitle">
-              Professional-grade tri-ply cookware designed for performance and built to last.
+              Professional-grade tri-ply cookware in every style — from everyday kadais to restaurant-grade woks.
             </p>
           </AnimatedSection>
 
           <div className={styles.catGrid}>
             {CATEGORIES.map((cat, index) => (
-              <AnimatedSection key={cat.id} variant="slideUp" delay={index * 0.08}>
-                <Link to={`/products/${cat.id}`} className={styles.catCard}>
-                  <div className={styles.catImageWrapper}>
-                    <img src={cat.image} alt={cat.name} className={styles.catImage} />
+              <AnimatedSection key={cat.id} variant="slideUp" delay={index * 0.07}>
+                <Link to={`/products/${cat.id}`} className={styles.catCard} id={`cat-${cat.id}`}>
+                  <div className={styles.catImageWrap}>
+                    <img src={cat.image} alt={cat.name} className={styles.catImage} loading="lazy" />
                     <div className={styles.catOverlay} />
                   </div>
-                  <div className={styles.catContent}>
+                  <div className={styles.catFooter}>
                     <span className={styles.catName}>{cat.name}</span>
-                    <div className={styles.catArrowWrap}>
-                      <ArrowRight size={16} className={styles.catArrow} />
+                    <div className={styles.catArrow}>
+                      <ArrowRight size={14} />
                     </div>
                   </div>
-                  <div className={styles.catGlowBorder} />
+                  <div className={styles.catHoverOverlay}>
+                    <span>Shop Now</span>
+                    <ChevronRight size={16} />
+                  </div>
                 </Link>
               </AnimatedSection>
             ))}
@@ -325,42 +263,92 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ===== SHOP BY VIDEOS ===== */}
-      <section className={`section ${styles.shopByVideos}`}>
+      {/* ===== PROMO BANNERS ===== */}
+      <section className={`section ${styles.promoBanners}`} id="promo-banners">
+        <div className="container">
+          <div className={styles.promoBannerGrid}>
+            {PROMO_BANNERS.map((banner, index) => (
+              <AnimatedSection key={banner.id} variant={index === 0 ? 'slideRight' : 'slideLeft'}>
+                <Link to={banner.link} className={styles.promoBannerCard} id={`promo-${banner.id}`}>
+                  <div className={styles.promoBannerBg} style={{ background: banner.bg }} />
+                  <div className={styles.promoBannerContent}>
+                    <span className={styles.promoBannerLabel} style={{ color: banner.accent }}>
+                      {banner.label}
+                    </span>
+                    <h3 className={styles.promoBannerTitle}>{banner.title}</h3>
+                    <p className={styles.promoBannerSubtitle}>{banner.subtitle}</p>
+                    <div className={styles.promoBannerCta}>
+                      <span>{banner.cta}</span>
+                      <ArrowRight size={14} />
+                    </div>
+                  </div>
+                  <div className={styles.promoBannerImgWrap}>
+                    <img src={banner.image} alt={banner.title} className={styles.promoBannerImg} loading="lazy" />
+                  </div>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FEATURED PRODUCTS ===== */}
+      <section className={`section ${styles.featuredProducts}`} id="featured-products">
         <div className="container">
           <AnimatedSection variant="blurReveal" className="text-center">
-            <h2 className={styles.shopVideosTitle}>
-              SHOP BY VIDEO
+            <p className="section-label">Best Sellers</p>
+            <h2 className="section-title">
+              Featured <span className="accent-text">Products</span>
             </h2>
-            <div className={styles.shopVideosTitleLine} />
+            <div className="red-line" />
+            <p className="section-subtitle">
+              Our most popular tri-ply cookware items, trusted by restaurants, hotels, and homes across India.
+            </p>
           </AnimatedSection>
 
-          <div className={styles.videoGrid}>
-            {SHOP_VIDEOS.map((video, index) => (
-              <AnimatedSection key={video.id} variant="slideUp" delay={index * 0.1}>
-                <div className={styles.videoCard}>
-                  <Link to={video.link} className={styles.videoThumbnail}>
-                    {video.video ? (
-                      <video
-                        src={video.video}
-                        poster={video.thumbnail}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className={styles.videoElement}
-                      />
-                    ) : (
-                      <img src={video.thumbnail} alt={video.title} />
-                    )}
-                    <div className={styles.videoOverlay} />
-                    <div className={styles.videoLabel}>
-                      <span>BALAJI</span>
-                    </div>
-                  </Link>
-                  <Link to={video.link} className={styles.shopNowBtn}>
-                    Shop by Video
-                  </Link>
+          {productsLoading ? (
+            <div className="page-loader" style={{ height: '220px' }}>
+              <div className="spinner" />
+            </div>
+          ) : (
+            <div className={styles.featuredGrid}>
+              {featuredProducts.map((product, index) => (
+                <AnimatedSection key={product.id} variant="slideUp" delay={index * 0.09}>
+                  <ProductCard product={product} />
+                </AnimatedSection>
+              ))}
+            </div>
+          )}
+
+          <AnimatedSection variant="fadeIn" className="text-center" style={{ marginTop: '2.5rem' }}>
+            <Link to="/products" className="btn btn-outline btn-lg" id="view-all-products-btn">
+              View All Products
+              <ArrowRight size={16} />
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ===== WHY CHOOSE US ===== */}
+      <section className={`section ${styles.whyUs}`} id="why-us-section">
+        <div className="container">
+          <AnimatedSection variant="blurReveal" className="text-center">
+            <p className="section-label">Why Us</p>
+            <h2 className="section-title">
+              Why Choose <span className="accent-text">Balaji Marketing</span>
+            </h2>
+            <div className="red-line" />
+          </AnimatedSection>
+
+          <div className={styles.whyGrid}>
+            {WHY_ITEMS.map((item, index) => (
+              <AnimatedSection key={index} variant="slideUp" delay={index * 0.08}>
+                <div className={styles.whyCard} id={`why-card-${index}`}>
+                  <div className={styles.whyIconWrap}>
+                    {item.icon}
+                  </div>
+                  <h3 className={styles.whyTitle}>{item.title}</h3>
+                  <p className={styles.whyDesc}>{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -368,51 +356,39 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ===== WHY CHOOSE US ===== */}
-      <section className={`section ${styles.whyUs}`}>
+      {/* ===== TESTIMONIALS ===== */}
+      <section className={`section ${styles.testimonials}`} id="testimonials-section">
         <div className="container">
-          <AnimatedSection>
+          <AnimatedSection variant="blurReveal" className="text-center">
+            <p className="section-label">Reviews</p>
             <h2 className="section-title">
-              Why Choose <span className="accent-text">Balaji Marketing</span>
+              What Our <span className="accent-text">Clients Say</span>
             </h2>
             <div className="red-line" />
             <p className="section-subtitle">
-              We combine quality craftsmanship with competitive pricing to deliver
-              cookware that exceeds expectations.
+              Trusted by restaurants, hotels, and retail partners across India.
             </p>
           </AnimatedSection>
 
-          <div className={styles.whyGrid}>
-            {[
-              {
-                icon: <Award size={28} />,
-                title: 'Premium Quality',
-                desc: 'Every piece is crafted with precision using tri-ply stainless steel for superior heat distribution and durability.',
-              },
-              {
-                icon: <Users size={28} />,
-                title: 'Wholesale Pricing',
-                desc: 'Competitive bulk pricing for retailers, distributors, and businesses. The best value without compromising quality.',
-              },
-              {
-                icon: <Truck size={28} />,
-                title: 'Pan-India Delivery',
-                desc: 'Reliable shipping across India with secure packaging. Your orders delivered safely and on time.',
-              },
-              {
-                icon: <Shield size={28} />,
-                title: 'Trusted Brand',
-                desc: 'Over a decade of experience serving satisfied clients. Quality you can trust, service you can rely on.',
-              },
-            ].map((item, index) => (
-              <AnimatedSection key={index} variant="slideUp" delay={index * 0.1} className={styles.whyWrapper}>
-                <div className={`glass-card ${styles.whyCard}`}>
-                  <div className={styles.whyIconWrapper}>
-                    <div className={styles.whyIcon}>{item.icon}</div>
-                    <div className={styles.whyIconPulse} />
+          <div className={styles.testimonialGrid}>
+            {TESTIMONIALS.map((testimonial, index) => (
+              <AnimatedSection key={testimonial.id} variant="slideUp" delay={index * 0.12}>
+                <div className={styles.testimonialCard} id={`testimonial-${testimonial.id}`}>
+                  <div className={styles.testimonialStars}>
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} size={14} fill="#F59E0B" color="#F59E0B" />
+                    ))}
                   </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
+                  <p className={styles.testimonialText}>"{testimonial.text}"</p>
+                  <div className={styles.testimonialAuthor}>
+                    <div className={styles.testimonialAvatar}>
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className={styles.testimonialName}>{testimonial.name}</div>
+                      <div className={styles.testimonialRole}>{testimonial.role}</div>
+                    </div>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -421,56 +397,55 @@ const Home = () => {
       </section>
 
       {/* ===== CTA BANNER ===== */}
-      <section className={styles.ctaBanner}>
-        <div className={styles.ctaParticles}>
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className={styles.ctaParticle} style={{
-              '--delay': `${i * 0.8}s`,
-              '--x': `${20 + Math.random() * 60}%`,
-              '--size': `${4 + Math.random() * 8}px`,
-            }} />
-          ))}
+      <section className={styles.ctaBanner} id="cta-banner">
+        <div className={styles.ctaBannerBg}>
+          <div className={styles.ctaBannerGlow1} />
+          <div className={styles.ctaBannerGlow2} />
+          <div className={styles.ctaBannerDots} />
         </div>
-        <AnimatedSection variant="scale">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Ready to Stock Premium Cookware?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Get in touch for wholesale pricing and bulk order inquiries.
-          </motion.p>
-          <div className={styles.ctaBtns}>
-            <a
-              href={`${WHATSAPP_LINK}?text=${encodeURIComponent('Hi, I want to inquire about wholesale cookware pricing.')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaIconBtn}
-              aria-label="WhatsApp"
-            >
-              <MessageCircle size={24} />
-              <span>WhatsApp</span>
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaIconBtn}
-              aria-label="Instagram"
-            >
-              <Camera size={24} />
-              <span>Instagram</span>
-            </a>
+        <div className="container">
+          <AnimatedSection variant="scale">
+            <div className={styles.ctaContent}>
+              <div className={styles.ctaTag}>
+                <Tag size={12} />
+                <span>Wholesale & Bulk Orders</span>
+              </div>
+              <h2 className={styles.ctaTitle}>
+                Ready to Stock Premium<br />Cookware?
+              </h2>
+              <p className={styles.ctaSubtitle}>
+                Get in touch for wholesale pricing, bulk order discounts, and custom requirements.
+              </p>
+              <div className={styles.ctaBtns}>
+                <a
+                  href={`${WHATSAPP_LINK}?text=${encodeURIComponent('Hi, I want to inquire about wholesale cookware pricing.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`btn btn-primary btn-lg ${styles.ctaBtn}`}
+                  id="cta-whatsapp-btn"
+                >
+                  <MessageCircle size={18} />
+                  WhatsApp Us
+                </a>
+                <Link to="/contact" className={`btn btn-lg ${styles.ctaOutlineBtn}`} id="cta-contact-btn">
+                  Contact Us
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+      {/* ===== PAYMENT TRUST STRIP ===== */}
+      <section className={styles.paymentStrip}>
+        <div className="container">
+          <div className={styles.paymentStripInner}>
+            <span className={styles.paymentStripLabel}>We Accept:</span>
+            {['UPI', 'Visa', 'MasterCard', 'RuPay', 'Net Banking', 'EMI', 'Cash on Delivery'].map((m) => (
+              <span key={m} className={styles.paymentChip}>{m}</span>
+            ))}
           </div>
-        </AnimatedSection>
+        </div>
       </section>
     </motion.main>
   );

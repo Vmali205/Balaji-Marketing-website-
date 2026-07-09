@@ -15,12 +15,14 @@ import Contact from './pages/Contact/Contact'
 import CategoryPage from './pages/Category/CategoryPage'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 
-// Lazy load admin pages for code splitting
+// Lazy load checkout & admin pages for code splitting
+const Checkout = lazy(() => import('./pages/Checkout/Checkout'))
+const OrderConfirmation = lazy(() => import('./pages/Checkout/OrderConfirmation'))
 const AdminLogin = lazy(() => import('./pages/Admin/Login'))
 const AdminDashboard = lazy(() => import('./pages/Admin/Dashboard'))
 const ProductForm = lazy(() => import('./pages/Admin/ProductForm'))
 
-function AdminLoader() {
+function PageLoader() {
   return (
     <div className="page-loader">
       <div className="spinner" />
@@ -45,29 +47,41 @@ function App() {
           <Route path="/products/:categoryId" element={<CategoryPage />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
           
+          {/* Checkout Routes */}
+          <Route path="/checkout" element={
+            <Suspense fallback={<PageLoader />}>
+              <Checkout />
+            </Suspense>
+          } />
+          <Route path="/order-confirmation" element={
+            <Suspense fallback={<PageLoader />}>
+              <OrderConfirmation />
+            </Suspense>
+          } />
+          
           {/* Admin Routes */}
           <Route path="/admin" element={
-            <Suspense fallback={<AdminLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <AdminLogin />
             </Suspense>
           } />
           <Route path="/admin/dashboard" element={
             <ProtectedRoute>
-              <Suspense fallback={<AdminLoader />}>
+              <Suspense fallback={<PageLoader />}>
                 <AdminDashboard />
               </Suspense>
             </ProtectedRoute>
           } />
           <Route path="/admin/products/new" element={
             <ProtectedRoute>
-              <Suspense fallback={<AdminLoader />}>
+              <Suspense fallback={<PageLoader />}>
                 <ProductForm />
               </Suspense>
             </ProtectedRoute>
           } />
           <Route path="/admin/products/:id/edit" element={
             <ProtectedRoute>
-              <Suspense fallback={<AdminLoader />}>
+              <Suspense fallback={<PageLoader />}>
                 <ProductForm />
               </Suspense>
             </ProtectedRoute>

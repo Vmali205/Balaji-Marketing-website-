@@ -73,3 +73,37 @@ export async function logout() {
 export async function checkAuth() {
   return request('auth.php?action=check');
 }
+
+// Orders API
+export async function createOrder(orderData) {
+  return request('orders.php', {
+    method: 'POST',
+    body: JSON.stringify(orderData),
+  });
+}
+
+export async function getOrders() {
+  return request('orders.php');
+}
+
+export async function updateOrderStatus(id, status) {
+  return request(`orders.php?id=${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+  });
+}
+
+// Payment API (Razorpay)
+export async function createRazorpayOrder(amount, currency = 'INR') {
+  return request('razorpay.php?action=create_order', {
+    method: 'POST',
+    body: JSON.stringify({ amount, currency }),
+  });
+}
+
+export async function verifyRazorpayPayment(paymentData) {
+  return request('razorpay.php?action=verify', {
+    method: 'POST',
+    body: JSON.stringify(paymentData),
+  });
+}

@@ -47,16 +47,25 @@ function handle_post() {
         'name' => $_POST['name'] ?? '',
         'category' => $_POST['category'] ?? '',
         'description' => $_POST['description'] ?? '',
-        'sizes' => array_map('trim', explode(',', $_POST['sizes'] ?? '')),
+        'sizes' => isset($_POST['sizes']) && $_POST['sizes'] !== '' ? array_map('trim', explode(',', $_POST['sizes'])) : [],
         'amazonLink' => $_POST['amazonLink'] ?? '',
+        'price' => isset($_POST['price']) ? (float)$_POST['price'] : null,
+        'mrp' => isset($_POST['mrp']) ? (float)$_POST['mrp'] : null,
+        'sku' => $_POST['sku'] ?? '',
+        'stockStatus' => $_POST['stockStatus'] ?? 'in-stock',
+        'features' => isset($_POST['features']) && $_POST['features'] !== '' ? array_map('trim', explode(',', $_POST['features'])) : [],
+        'purchaseMode' => $_POST['purchaseMode'] ?? 'both',
+        'isOnlinePurchase' => filter_var($_POST['isOnlinePurchase'] ?? 'true', FILTER_VALIDATE_BOOLEAN),
+        'isWholesaleOnly' => filter_var($_POST['isWholesaleOnly'] ?? 'false', FILTER_VALIDATE_BOOLEAN),
         'createdAt' => date('c'),
     ];
 
-    // Handle image upload
+    // Handle image upload (primary)
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $imgUrl = handle_image_upload($_FILES['image']);
         if ($imgUrl) {
             $newProduct['image'] = $imgUrl;
+            $newProduct['images'] = [$imgUrl]; // Also add to images array
         }
     }
 
@@ -84,8 +93,25 @@ function handle_put($id) {
     $product['name'] = $_POST['name'] ?? $product['name'];
     $product['category'] = $_POST['category'] ?? $product['category'];
     $product['description'] = $_POST['description'] ?? $product['description'];
-    $product['sizes'] = isset($_POST['sizes']) ? array_map('trim', explode(',', $_POST['sizes'])) : $product['sizes'];
+    
+    if (isset($_POST['sizes'])) {
+        $product['sizes'] = $_POST['sizes'] !== '' ? array_map('trim', explode(',', $_POST['sizes'])) : [];
+    }
+    
     $product['amazonLink'] = $_POST['amazonLink'] ?? $product['amazonLink'];
+    $product['price'] = isset($_POST['price']) ? (float)$_POST['price'] : ($product['price'] ?? null);
+    $product['mrp'] = isset($_POST['mrp']) ? (float)$_POST['mrp'] : ($product['mrp'] ?? null);
+    $product['sku'] = $_POST['sku'] ?? ($product['sku'] ?? '');
+    $product['stockStatus'] = $_POST['stockStatus'] ?? ($product['stockStatus'] ?? 'in-stock');
+    
+    if (isset($_POST['features'])) {
+        $product['features'] = $_POST['features'] !== '' ? array_map('trim', explode(',', $_POST['features'])) : [];
+    }
+    
+    $product['purchaseMode'] = $_POST['purchaseMode'] ?? ($product['purchaseMode'] ?? 'both');
+    $product['isOnlinePurchase'] = isset($_POST['isOnlinePurchase']) ? filter_var($_POST['isOnlinePurchase'], FILTER_VALIDATE_BOOLEAN) : ($product['isOnlinePurchase'] ?? true);
+    $product['isWholesaleOnly'] = isset($_POST['isWholesaleOnly']) ? filter_var($_POST['isWholesaleOnly'], FILTER_VALIDATE_BOOLEAN) : ($product['isWholesaleOnly'] ?? false);
+    
     $product['updatedAt'] = date('c');
 
     // Handle image upload if provided
@@ -99,6 +125,7 @@ function handle_put($id) {
         $imgUrl = handle_image_upload($_FILES['image']);
         if ($imgUrl) {
             $product['image'] = $imgUrl;
+            $product['images'] = [$imgUrl]; // Simple fallback for now
         }
     }
 

@@ -165,6 +165,23 @@
   outline: none;
 }
 
+.sortSelect {
+  padding: 1.2rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-default);
+}
+
+.sortSelect:focus {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
 .productsSection {
   padding: 4rem 0;
 }

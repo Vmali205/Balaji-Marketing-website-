@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, MessageCircle, ShoppingBag, ExternalLink } from 'lucide-react';
 import useProducts from '../../hooks/useProducts';
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
+import ProductCard from '../../components/ProductCard/ProductCard';
 import { CATEGORIES, WHATSAPP_LINK } from '../../utils/constants';
 import styles from './CategoryPage.module.css';
 
@@ -163,7 +164,7 @@ const CategoryPage = () => {
                     transition={{ duration: 0.4 }}
                     style={{ height: '100%' }}
                   >
-                    <CategoryProductCard product={product} />
+                    <ProductCard product={product} />
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -249,74 +250,6 @@ const CategoryPage = () => {
         </div>
       </section>
     </motion.main>
-  );
-};
-
-/* ===== PRODUCT CARD FOR CATEGORY PAGE ===== */
-const CategoryProductCard = ({ product }) => {
-  const { name, image, sizes, description, amazonLink } = product;
-
-  const whatsappMsg = encodeURIComponent(
-    `Hi, I'm interested in "${name}" from your catalogue. Please share pricing and availability details.`
-  );
-
-  return (
-    <div className={styles.productCard}>
-      <Link to={`/product/${product.id}`} className={styles.productImageWrap}>
-        {image ? (
-          <img src={image} alt={name} className={styles.productImage} loading="lazy" />
-        ) : (
-          <div className={styles.productPlaceholder}>
-            <ShoppingBag size={40} strokeWidth={1} />
-          </div>
-        )}
-      </Link>
-
-      <div className={styles.productContent}>
-        <Link to={`/product/${product.id}`}>
-          <h3 className={styles.productName}>{name}</h3>
-        </Link>
-        {description && <p className={styles.productDesc}>{description}</p>}
-
-        {sizes && sizes.length > 0 && (
-          <div className={styles.productSizes}>
-            {sizes.map((size, i) => (
-              <span key={i} className={styles.productSizeChip}>{size}</span>
-            ))}
-          </div>
-        )}
-
-        <div className={styles.productActions}>
-          <Link
-            to={`/product/${product.id}`}
-            className={`btn btn-secondary ${styles.productBtn}`}
-          >
-            View Details
-          </Link>
-          {amazonLink ? (
-            <a
-              href={amazonLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn btn-amazon ${styles.productBtn}`}
-            >
-              <ExternalLink size={14} />
-              Amazon
-            </a>
-          ) : (
-            <a
-              href={`${WHATSAPP_LINK}?text=${whatsappMsg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn btn-primary ${styles.productBtn}`}
-            >
-              <MessageCircle size={14} />
-              Get Quote
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
   );
 };
 

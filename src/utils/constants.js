@@ -2,6 +2,37 @@ export const WHATSAPP_NUMBER = '918754408847';
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 export const WHATSAPP_DEFAULT_MESSAGE = 'Hi, I am interested in your tri-ply cookware products. Please share more details.';
 
+// Purchase modes for products
+export const PURCHASE_MODES = {
+  ONLINE: 'online',       // Add to Cart + Buy Now
+  AMAZON: 'amazon',       // Buy on Amazon redirect
+  WHOLESALE: 'wholesale', // Get Quote via WhatsApp/Contact
+  BOTH: 'both',           // Online + Amazon link available
+};
+
+// Order statuses
+export const ORDER_STATUSES = {
+  PENDING: 'pending',
+  CONFIRMED: 'confirmed',
+  PROCESSING: 'processing',
+  SHIPPED: 'shipped',
+  DELIVERED: 'delivered',
+  CANCELLED: 'cancelled',
+};
+
+// Payment methods
+export const PAYMENT_METHODS = {
+  RAZORPAY: 'razorpay',
+  COD: 'cod',
+};
+
+// Shipping configuration
+export const SHIPPING_CONFIG = {
+  flatRate: 99,
+  freeAbove: 999,
+  currency: '₹',
+};
+
 export const CATEGORIES = [
   {
     id: 'kadai',
@@ -84,7 +115,40 @@ export const COMPANY_INFO = {
   email: 'info@balajimarketingvasai.com',
   address: 'Ground Floor, Gala No. 1 & 4, Rashmi Industrial Estate, Navghar Manikpur, Samarth Krupa Nagar, Vasai East, Vasai-Virar, Maharashtra 401202',
   whatsapp: WHATSAPP_NUMBER,
+  instagram: 'https://instagram.com/balajimarketingvasai',
 };
+
+// Testimonials data
+export const TESTIMONIALS = [
+  {
+    id: 1,
+    name: 'Rajesh Sharma',
+    role: 'Restaurant Owner, Mumbai',
+    rating: 5,
+    text: 'We switched to Balaji Marketing\'s tri-ply cookware for our entire kitchen. The heat distribution is unmatched and they\'ve lasted over 3 years without any issues. Best wholesale partner we\'ve worked with.',
+  },
+  {
+    id: 2,
+    name: 'Priya Mehta',
+    role: 'Retail Store Owner, Pune',
+    rating: 5,
+    text: 'Exceptional quality at wholesale prices. Our customers love the tri-ply range. The team at Balaji Marketing is always responsive and delivers on time. Highly recommended for retailers.',
+  },
+  {
+    id: 3,
+    name: 'Amit Patel',
+    role: 'Hotel Chain Manager, Gujarat',
+    rating: 5,
+    text: 'We\'ve been sourcing cookware from Balaji Marketing for our hotel chain. The consistency in quality across large bulk orders is impressive. Their kadai and wok range is restaurant-grade.',
+  },
+  {
+    id: 4,
+    name: 'Sunita Desai',
+    role: 'Home Chef & Food Blogger',
+    rating: 5,
+    text: 'As a food blogger, I need reliable cookware for my shoots and cooking sessions. The tri-ply pans from Balaji Marketing heat evenly and look beautiful on camera. Worth every rupee!',
+  },
+];
 
 // API base URL - adjust for production
 export const API_BASE = '/api';

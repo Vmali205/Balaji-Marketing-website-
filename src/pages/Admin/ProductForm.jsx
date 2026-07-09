@@ -23,7 +23,15 @@ const ProductForm = () => {
     category: '',
     description: '',
     sizes: '',
-    amazonLink: ''
+    amazonLink: '',
+    price: '',
+    mrp: '',
+    sku: '',
+    stockStatus: 'in-stock',
+    features: '',
+    purchaseMode: 'both',
+    isOnlinePurchase: true,
+    isWholesaleOnly: false
   });
   
   const [image, setImage] = useState(null);
@@ -47,7 +55,15 @@ const ProductForm = () => {
               category: product.category,
               description: product.description || '',
               sizes: Array.isArray(product.sizes) ? product.sizes.join(', ') : product.sizes || '',
-              amazonLink: product.amazonLink || ''
+              amazonLink: product.amazonLink || '',
+              price: product.price || '',
+              mrp: product.mrp || '',
+              sku: product.sku || '',
+              stockStatus: product.stockStatus || 'in-stock',
+              features: Array.isArray(product.features) ? product.features.join(', ') : product.features || '',
+              purchaseMode: product.purchaseMode || 'both',
+              isOnlinePurchase: product.isOnlinePurchase !== undefined ? product.isOnlinePurchase : true,
+              isWholesaleOnly: product.isWholesaleOnly || false
             });
             setImagePreview(product.image || '');
           } else {
@@ -64,8 +80,11 @@ const ProductForm = () => {
   }, [id, isEdit]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({ 
+      ...prev, 
+      [name]: type === 'checkbox' ? checked : value 
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -92,6 +111,14 @@ const ProductForm = () => {
       data.append('description', formData.description);
       data.append('sizes', formData.sizes);
       data.append('amazonLink', formData.amazonLink);
+      data.append('price', formData.price);
+      data.append('mrp', formData.mrp);
+      data.append('sku', formData.sku);
+      data.append('stockStatus', formData.stockStatus);
+      data.append('features', formData.features);
+      data.append('purchaseMode', formData.purchaseMode);
+      data.append('isOnlinePurchase', formData.isOnlinePurchase);
+      data.append('isWholesaleOnly', formData.isWholesaleOnly);
       
       if (image) {
         data.append('image', image);
@@ -194,6 +221,69 @@ const ProductForm = () => {
                   ></textarea>
                 </div>
 
+                <div className="form-group">
+                  <label className="form-label">Features (Comma separated)</label>
+                  <textarea 
+                    name="features"
+                    className="form-textarea"
+                    placeholder="e.g. Even heat distribution, Rust resistant, Dishwasher safe"
+                    value={formData.features}
+                    onChange={handleChange}
+                    style={{ minHeight: '60px' }}
+                  ></textarea>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-group">
+                    <label className="form-label">Price (₹)</label>
+                    <input 
+                      type="number" 
+                      name="price"
+                      className="form-input"
+                      placeholder="e.g. 1999"
+                      value={formData.price}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">MRP (₹)</label>
+                    <input 
+                      type="number" 
+                      name="mrp"
+                      className="form-input"
+                      placeholder="e.g. 2499"
+                      value={formData.mrp}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-group">
+                    <label className="form-label">SKU</label>
+                    <input 
+                      type="text" 
+                      name="sku"
+                      className="form-input"
+                      placeholder="e.g. BMV-KAD-24"
+                      value={formData.sku}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Stock Status</label>
+                    <select 
+                      name="stockStatus"
+                      className="form-select"
+                      value={formData.stockStatus}
+                      onChange={handleChange}
+                    >
+                      <option value="in-stock">In Stock</option>
+                      <option value="out-of-stock">Out of Stock</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className="form-grid-2">
                   <div className="form-group">
                     <label className="form-label">Available Sizes</label>
@@ -206,19 +296,56 @@ const ProductForm = () => {
                       onChange={handleChange}
                     />
                   </div>
+                    <div className="form-group">
+                      <label className="form-label">Amazon Link (Optional)</label>
+                      <input 
+                        type="url" 
+                        name="amazonLink"
+                        className="form-input"
+                        placeholder="https://amazon.in/..."
+                        value={formData.amazonLink}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+
                   <div className="form-group">
-                    <label className="form-label">Amazon Link (Optional)</label>
-                    <input 
-                      type="url" 
-                      name="amazonLink"
-                      className="form-input"
-                      placeholder="https://amazon.in/..."
-                      value={formData.amazonLink}
+                    <label className="form-label">Purchase Mode</label>
+                    <select 
+                      name="purchaseMode"
+                      className="form-select"
+                      value={formData.purchaseMode}
                       onChange={handleChange}
-                    />
+                    >
+                      <option value="both">Both (Online + Wholesale)</option>
+                      <option value="online">Online Retail Only</option>
+                      <option value="wholesale">Wholesale Only</option>
+                    </select>
+                  </div>
+
+                  <div className="form-grid-2" style={{ marginTop: '0.5rem', gap: '1rem' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem' }}>
+                      <input 
+                        type="checkbox" 
+                        name="isOnlinePurchase"
+                        checked={formData.isOnlinePurchase}
+                        onChange={handleChange}
+                        style={{ width: '16px', height: '16px' }}
+                      />
+                      Enable Online Purchase
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem' }}>
+                      <input 
+                        type="checkbox" 
+                        name="isWholesaleOnly"
+                        checked={formData.isWholesaleOnly}
+                        onChange={handleChange}
+                        style={{ width: '16px', height: '16px' }}
+                      />
+                      Wholesale Only Product
+                    </label>
                   </div>
                 </div>
-              </div>
 
               {/* Right Column: Image */}
               <div className={styles.formSide}>

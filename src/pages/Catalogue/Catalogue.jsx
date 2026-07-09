@@ -15,15 +15,33 @@ const Catalogue = () => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const activeCategory = searchParams.get('category') || 'all';
+  const [sortOption, setSortOption] = useState('default');
 
   const filteredProducts = useMemo(() => {
-    return products.filter(product => {
+    let result = products.filter(product => {
       const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                           product.description.toLowerCase().includes(searchQuery.toLowerCase());
+                           (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesCategory && matchesSearch;
     });
-  }, [products, activeCategory, searchQuery]);
+
+    switch (sortOption) {
+      case 'price-low':
+        result.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+        break;
+      case 'price-high':
+        result.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+        break;
+      case 'name-asc':
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      default:
+        // default sorting (could be based on ID or featured flag, keeping it as is)
+        break;
+    }
+
+    return result;
+  }, [products, activeCategory, searchQuery, sortOption]);
 
   const handleCategoryChange = (categoryId) => {
     if (categoryId === 'all') {
@@ -111,6 +129,17 @@ const Catalogue = () => {
               activeCategory={activeCategory} 
               onCategoryChange={handleCategoryChange} 
             />
+
+            <select 
+              value={sortOption} 
+              onChange={(e) => setSortOption(e.target.value)}
+              className={styles.sortSelect}
+            >
+              <option value="default">Sort by: Default</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name-asc">Name: A to Z</option>
+            </select>
           </div>
         </div>
       </section>
