@@ -999,3 +999,9 @@
     font-size: 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .featuredGrid {
+    grid-template-columns: 1fr;
+  }
+}
