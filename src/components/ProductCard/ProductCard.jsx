@@ -1,5 +1,5 @@
 import { ExternalLink, MessageCircle, Package, ArrowRight, ShoppingCart, Eye, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../Toast/Toast';
 import { WHATSAPP_LINK, CATEGORIES, SHIPPING_CONFIG, PURCHASE_MODES } from '../../utils/constants';
@@ -26,6 +26,7 @@ const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
   const { addToast } = useToast();
 
+  const navigate = useNavigate();
   const categoryData = CATEGORIES.find((c) => c.id === category);
   const categoryLabel = categoryData ? categoryData.name : category;
 
@@ -40,6 +41,15 @@ const ProductCard = ({ product }) => {
     addToCart(product, 1, defaultSize);
     addToast(`${name} added to cart`, 'success');
   };
+
+  const handleBuyNow = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const defaultSize = sizes && sizes.length > 0 ? sizes[0] : null;
+    addToCart(product, 1, defaultSize);
+    navigate('/checkout');
+  };
+
 
   const canBuyOnline = isOnlinePurchase || purchaseMode === PURCHASE_MODES.ONLINE || purchaseMode === PURCHASE_MODES.BOTH;
   const hasAmazon = !!amazonLink;
@@ -148,14 +158,23 @@ const ProductCard = ({ product }) => {
         {/* CTA Buttons */}
         <div className={styles.actions}>
           {canBuyOnline && (
-            <button
-              onClick={handleAddToCart}
-              className={`btn btn-primary ${styles.btn}`}
-              id={`add-to-cart-${product.id}`}
-            >
-              <ShoppingCart size={13} />
-              Add to Cart
-            </button>
+            <>
+              <button
+                onClick={handleAddToCart}
+                className={`btn btn-outline ${styles.btn}`}
+                id={`add-to-cart-${product.id}`}
+              >
+                <ShoppingCart size={13} />
+                Cart
+              </button>
+              <button
+                onClick={handleBuyNow}
+                className={`btn btn-primary ${styles.btn}`}
+                id={`buy-now-${product.id}`}
+              >
+                Buy Now
+              </button>
+            </>
           )}
 
           {hasAmazon && (
