@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight, Award, Truck, Shield, Users, MessageCircle,
-  Star, Package, ChevronRight, CheckCircle, Zap, Tag
+  Star, Package, ChevronRight, CheckCircle, Zap, Tag,
+  ChevronLeft
 } from 'lucide-react';
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import AnimatedCounter from '../../components/AnimatedCounter/AnimatedCounter';
@@ -72,6 +73,50 @@ const PROMO_BANNERS = [
   },
 ];
 
+/* ===== HERO SLIDESHOW DATA ===== */
+const HERO_SLIDES = [
+  {
+    id: 0,
+    tag: 'Premium Tri-Ply Quality',
+    title: 'Stainless Steel\nCook Pots',
+    subtitle: 'Professional-grade tri-ply construction for even heat distribution. Built to last a lifetime.',
+    cta: 'Know More',
+    link: '/products/cook-pots',
+    image: '/images/products/cook-pots-hero.png',
+    accentColor: '#C62828',
+  },
+  {
+    id: 1,
+    tag: 'Durable & Versatile',
+    title: 'Heavy Duty\nKadai Series',
+    subtitle: 'Deep kadais with perfect heat retention — ideal for restaurants, hotels, and bulk kitchens.',
+    cta: 'Know More',
+    link: '/products/kadai',
+    image: '/images/products/kadai-hero.png',
+    accentColor: '#C62828',
+  },
+  {
+    id: 2,
+    tag: 'Non-stick Excellence',
+    title: 'Premium\nFry Pans',
+    subtitle: 'Induction compatible fry pans with mirror-finish steel — designed for effortless cooking.',
+    cta: 'Know More',
+    link: '/products/fry-pan',
+    image: '/images/products/fry-pan-hero.png',
+    accentColor: '#C62828',
+  },
+  {
+    id: 3,
+    tag: 'Insulated & Stylish',
+    title: 'Vacuum\nInsulated Bottles',
+    subtitle: 'Keep beverages hot or cold for 24 hours. Premium stainless steel construction.',
+    cta: 'Know More',
+    link: '/products/bottles',
+    image: '/images/products/bottle-flasks-hero.png',
+    accentColor: '#C62828',
+  },
+];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -90,14 +135,54 @@ const childVariants = {
 };
 
 const Home = () => {
-  const heroRef = useRef(null);
-  const heroInView = useInView(heroRef, { once: true });
   const { products, loading: productsLoading } = useProducts();
   const featuredProducts = products.slice(0, 4);
+
+  /* ===== SLIDESHOW STATE ===== */
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const [isPaused, setIsPaused] = useState(false);
+  const autoPlayRef = useRef(null);
+
+  const goToSlide = useCallback((index, dir) => {
+    setDirection(dir);
+    setCurrentSlide(index);
+  }, []);
+
+  const goNext = useCallback(() => {
+    const next = (currentSlide + 1) % HERO_SLIDES.length;
+    goToSlide(next, 1);
+  }, [currentSlide, goToSlide]);
+
+  const goPrev = useCallback(() => {
+    const prev = (currentSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
+    goToSlide(prev, -1);
+  }, [currentSlide, goToSlide]);
+
+  useEffect(() => {
+    if (isPaused) return;
+    autoPlayRef.current = setInterval(goNext, 5000);
+    return () => clearInterval(autoPlayRef.current);
+  }, [goNext, isPaused]);
 
   useEffect(() => {
     document.title = 'Balaji Marketing Vasai | Premium Tri-Ply Cookware Wholesale';
   }, []);
+
+  const slide = HERO_SLIDES[currentSlide];
+
+  /* Slide animation variants */
+  const textVariants = {
+    enter: (dir) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
+    center: { opacity: 1, x: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+    exit: (dir) => ({ opacity: 0, x: dir > 0 ? -40 : 40, transition: { duration: 0.35 } }),
+  };
+
+  const imageVariants = {
+    enter: (dir) => ({ opacity: 0, x: dir > 0 ? 80 : -80, scale: 0.92 }),
+    center: { opacity: 1, x: 0, scale: 1, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+    exit: (dir) => ({ opacity: 0, x: dir > 0 ? -60 : 60, scale: 0.95, transition: { duration: 0.35 } }),
+  };
 
   return (
     <motion.main
@@ -106,61 +191,83 @@ const Home = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
     >
-      {/* ===== HERO SECTION ===== */}
-      <section className={styles.hero} ref={heroRef} id="hero-section">
-        {/* Subtle background pattern */}
+      {/* ===== HERO SLIDESHOW ===== */}
+      <section
+        className={styles.hero}
+        id="hero-section"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Subtle decorative bg */}
         <div className={styles.heroBg}>
           <div className={styles.heroDotGrid} />
           <div className={styles.heroAccentBlob1} />
-          <div className={styles.heroAccentBlob2} />
-          <div className={styles.heroAccentBlob3} />
         </div>
 
-        <div className="container">
+        <div className={styles.heroSliderWrap}>
+          {/* LEFT ARROW */}
+          <button
+            className={`${styles.slideArrow} ${styles.slideArrowLeft}`}
+            onClick={goPrev}
+            aria-label="Previous slide"
+            id="hero-prev-btn"
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          {/* SLIDE CONTENT */}
           <div className={styles.heroContent}>
             {/* LEFT: Text column */}
-            <motion.div
-              className={styles.heroTextCol}
-              variants={containerVariants}
-              initial="hidden"
-              animate={heroInView ? 'visible' : 'hidden'}
-            >
-              <motion.div variants={childVariants} className={styles.heroPill}>
-                <Zap size={12} fill="currentColor" />
-                <span>Trusted Wholesale Partner Since 2015</span>
-              </motion.div>
-
-              <motion.h1 variants={childVariants} className={styles.heroTitle}>
-                Premium <span className={styles.heroTitleAccent}>Tri-Ply</span><br />
-                Cookware for<br />
-                <span className={styles.heroTitleAccent}>Your Business</span>
-              </motion.h1>
-
-              <motion.p variants={childVariants} className={styles.heroSubtitle}>
-                Professional-grade stainless steel cookware built for performance, 
-                designed for durability — at competitive wholesale prices.
-              </motion.p>
-
-              <motion.div variants={childVariants} className={styles.heroChecks}>
-                {['ISI Certified Quality', 'Induction Compatible', 'Pan-India Delivery'].map((item) => (
-                  <div key={item} className={styles.heroCheck}>
-                    <CheckCircle size={14} />
-                    <span>{item}</span>
+            <div className={styles.heroTextCol}>
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={`text-${currentSlide}`}
+                  className={styles.heroTextInner}
+                  custom={direction}
+                  variants={textVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                >
+                  <div className={styles.heroTag}>
+                    {slide.tag}
                   </div>
-                ))}
-              </motion.div>
 
-              <motion.div variants={childVariants} className={styles.heroActions}>
-                <Link to="/products" className="btn btn-primary btn-lg" id="hero-shop-btn">
-                  Shop Collection
-                  <ArrowRight size={16} />
-                </Link>
-                <Link to="/catalogue" className={`btn btn-outline btn-lg ${styles.heroOutlineBtn}`} id="hero-catalogue-btn">
-                  View Catalogue
-                </Link>
-              </motion.div>
+                  <h1 className={styles.heroTitle}>
+                    {slide.title.split('\n').map((line, i) => (
+                      <span key={i}>{line}{i < slide.title.split('\n').length - 1 && <br />}</span>
+                    ))}
+                  </h1>
 
-              <motion.div variants={childVariants} className={styles.heroStats}>
+                  <p className={styles.heroSubtitle}>{slide.subtitle}</p>
+
+                  <div className={styles.heroChecks}>
+                    {['ISI Certified', 'Induction Ready', 'Bulk Pricing'].map((item) => (
+                      <div key={item} className={styles.heroCheck}>
+                        <CheckCircle size={13} />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={styles.heroActions}>
+                    <Link
+                      to={slide.link}
+                      className={styles.heroKnowMoreBtn}
+                      id={`hero-cta-${currentSlide}`}
+                    >
+                      {slide.cta}
+                      <ArrowRight size={15} />
+                    </Link>
+                    <Link to="/catalogue" className={styles.heroCatalogueBtn} id="hero-catalogue-btn">
+                      View Catalogue
+                    </Link>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Stats strip */}
+              <div className={styles.heroStats}>
                 <div className={styles.stat}>
                   <span className={styles.statNum}><AnimatedCounter target={50} suffix="+" /></span>
                   <span className={styles.statLabel}>Product SKUs</span>
@@ -175,50 +282,68 @@ const Home = () => {
                   <span className={styles.statNum}><AnimatedCounter target={10} suffix="+" duration={1500} /></span>
                   <span className={styles.statLabel}>Years Exp.</span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* RIGHT: Image column */}
-            <motion.div
-              className={styles.heroImageCol}
-              initial={{ opacity: 0, x: 50, scale: 0.95 }}
-              animate={heroInView ? { opacity: 1, x: 0, scale: 1 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            >
-              <div className={styles.heroImageFrame}>
-                <div className={styles.heroImageBg} />
-                <img
-                  src="/images/hero/hero-pot-cinematic.png"
-                  alt="Premium Balaji Tri-Ply Cookware"
-                  className={styles.heroImg}
-                />
-                {/* Floating stat cards */}
+            <div className={styles.heroImageCol}>
+              <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
-                  className={`${styles.floatCard} ${styles.floatCard1}`}
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                  key={`img-${currentSlide}`}
+                  className={styles.heroImageFrame}
+                  custom={direction}
+                  variants={imageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
                 >
-                  <div className={styles.floatCardIcon}><Star size={14} fill="currentColor" /></div>
-                  <div>
-                    <div className={styles.floatCardVal}>4.9/5</div>
-                    <div className={styles.floatCardLbl}>Avg Rating</div>
-                  </div>
+                  <div className={styles.heroImageBg} />
+                  <img
+                    src={slide.image}
+                    alt={slide.title.replace('\n', ' ')}
+                    className={styles.heroImg}
+                  />
                 </motion.div>
-                <motion.div
-                  className={`${styles.floatCard} ${styles.floatCard2}`}
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                >
-                  <div className={styles.floatCardIcon}><Shield size={14} /></div>
-                  <div>
-                    <div className={styles.floatCardVal}>3-Layer</div>
-                    <div className={styles.floatCardLbl}>Tri-Ply Steel</div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
+
+          {/* RIGHT ARROW */}
+          <button
+            className={`${styles.slideArrow} ${styles.slideArrowRight}`}
+            onClick={goNext}
+            aria-label="Next slide"
+            id="hero-next-btn"
+          >
+            <ChevronRight size={22} />
+          </button>
         </div>
+
+        {/* DOT INDICATORS */}
+        <div className={styles.slideDots}>
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              className={`${styles.slideDot} ${i === currentSlide ? styles.slideDotActive : ''}`}
+              onClick={() => goToSlide(i, i > currentSlide ? 1 : -1)}
+              aria-label={`Go to slide ${i + 1}`}
+              id={`hero-dot-${i}`}
+            />
+          ))}
+        </div>
+
+        {/* PROGRESS BAR */}
+        {!isPaused && (
+          <div className={styles.slideProgress}>
+            <motion.div
+              key={currentSlide}
+              className={styles.slideProgressBar}
+              initial={{ width: '0%' }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 5, ease: 'linear' }}
+            />
+          </div>
+        )}
       </section>
 
       {/* ===== TRUST MARQUEE ===== */}
