@@ -33,3 +33,6 @@ React.js/
 *.exe
 *.dll
 *.bat
+
+# Antigravity IDE application files (contains secrets)
+Antigravity IDE/

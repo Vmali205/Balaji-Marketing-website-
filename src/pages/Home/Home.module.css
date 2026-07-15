@@ -2,15 +2,15 @@
    HOME PAGE — PREMIUM E-COMMERCE DESIGN
    =========================== */
 
-/* ===== HERO SLIDESHOW ===== */
+/* ===== HERO SLIDESHOW — muktiindia style ===== */
 .hero {
   position: relative;
-  min-height: 88vh;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   background: #ffffff;
   overflow: hidden;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .heroBg {
@@ -20,25 +20,23 @@
   z-index: 0;
 }
 
+/* Very subtle warm-grey gradient wash — keeps it clean like the reference */
 .heroDotGrid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(198,40,40,0.055) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 10%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 10%, transparent 80%);
+  background: radial-gradient(ellipse 70% 80% at 72% 50%, rgba(198,40,40,0.04) 0%, transparent 70%);
 }
 
 .heroAccentBlob1 {
   position: absolute;
-  top: -20%;
-  right: -5%;
-  width: 600px;
-  height: 600px;
+  bottom: -10%;
+  right: 20%;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(198,40,40,0.07) 0%, transparent 65%);
-  filter: blur(80px);
-  animation: blobPulse 10s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(198,40,40,0.055) 0%, transparent 65%);
+  filter: blur(90px);
+  animation: blobPulse 12s ease-in-out infinite;
 }
 
 /* SLIDER WRAPPER */
@@ -48,17 +46,17 @@
   display: flex;
   align-items: center;
   z-index: 2;
-  padding: 5rem 0 4rem;
+  padding: 4.5rem 0 5rem;
 }
 
-/* SLIDE CONTENT GRID */
+/* SLIDE CONTENT GRID — text left, image right */
 .heroContent {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 3rem;
   align-items: center;
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 0 5rem;
   width: 100%;
@@ -79,74 +77,60 @@
   width: 100%;
 }
 
-/* Tag label */
+/* Category tag — matches the reference "STAINLESS STEEL" label */
 .heroTag {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: #C62828;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-bottom: 1.2rem;
-  position: relative;
-  padding-left: 1.4rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.1rem;
 }
 
-.heroTag::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 18px;
-  height: 2px;
-  background: #C62828;
-  border-radius: 2px;
-}
-
-/* Title */
+/* Title — large bold like the reference */
 .heroTitle {
-  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   color: #1a1a1a;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
 }
 
 .heroTitleAccent {
   color: #C62828;
 }
 
-/* Subtitle */
+/* Subtitle — minimal, concise */
 .heroSubtitle {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: #555;
-  margin-bottom: 1.8rem;
-  max-width: 440px;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 420px;
   font-weight: 400;
 }
 
-/* Check pills */
+/* Feature pills */
 .heroChecks {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 2.2rem;
+  gap: 0.55rem;
+  margin-bottom: 2.4rem;
 }
 
 .heroCheck {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.78rem;
+  gap: 0.35rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  color: #333;
-  background: #f5f5f5;
-  padding: 0.32rem 0.85rem;
+  color: #444;
+  background: #f7f7f7;
+  padding: 0.3rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #e5e5e5;
 }
 
 .heroCheck svg {
@@ -157,47 +141,52 @@
 /* Action buttons */
 .heroActions {
   display: flex;
-  gap: 1rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
   margin-bottom: 0;
 }
 
+/* Primary CTA — dark navy pill matching the reference */
 .heroKnowMoreBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 2rem;
+  gap: 0.45rem;
+  padding: 0.82rem 2.1rem;
   background: #1a1a2e;
   color: #fff;
-  font-size: 0.875rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  border-radius: 8px;
+  border-radius: 50px;
   text-decoration: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 20px rgba(26,26,46,0.25);
+  box-shadow: 0 6px 24px rgba(26,26,46,0.22);
 }
 
 .heroKnowMoreBtn:hover {
   background: #C62828;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(198,40,40,0.35);
+  box-shadow: 0 10px 30px rgba(198,40,40,0.35);
   color: #fff;
 }
 
+/* Secondary CTA */
 .heroCatalogueBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
+  gap: 0.45rem;
+  padding: 0.82rem 1.6rem;
   background: transparent;
   color: #333;
-  font-size: 0.875rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 50px;
   text-decoration: none;
   border: 1.5px solid #d0d0d0;
   transition: all 0.25s ease;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .heroCatalogueBtn:hover {
@@ -206,25 +195,25 @@
   background: rgba(198,40,40,0.04);
 }
 
-/* Stats */
+/* Stats strip — sits below buttons */
 .heroStats {
   display: flex;
-  gap: 2.5rem;
+  gap: 2.2rem;
   align-items: center;
-  padding-top: 2.2rem;
-  margin-top: 2.2rem;
+  padding-top: 2rem;
+  margin-top: 2rem;
   border-top: 1px solid #ebebeb;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.18rem;
 }
 
 .statNum {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 1.85rem;
   font-weight: 900;
   color: #1a1a1a;
   line-height: 1;
@@ -232,41 +221,46 @@
 }
 
 .statLabel {
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 600;
-  color: #888;
+  color: #999;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
 .statDivider {
   width: 1px;
-  height: 38px;
-  background: #e0e0e0;
+  height: 34px;
+  background: #e5e5e5;
 }
 
-/* IMAGE COLUMN */
+/* IMAGE COLUMN — large, centred product image like the reference */
 .heroImageCol {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 2rem 0;
 }
 
 .heroImageFrame {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Soft circular glow behind the product */
 .heroImageBg {
   position: absolute;
-  inset: 5% 5% -5% -5%;
-  background: radial-gradient(ellipse at 60% 40%, rgba(198,40,40,0.08) 0%, rgba(240,240,240,0.6) 55%, transparent 80%);
+  inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 55%, rgba(198,40,40,0.06) 0%, rgba(245,245,245,0.9) 55%, transparent 80%);
   border-radius: 50%;
   z-index: 0;
-  filter: blur(50px);
-  animation: blobPulse 7s ease-in-out infinite;
+  filter: blur(40px);
+  animation: blobPulse 8s ease-in-out infinite;
 }
 
 .heroImg {
@@ -274,7 +268,9 @@
   z-index: 1;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 20px 60px rgba(0,0,0,0.12)) drop-shadow(0 4px 20px rgba(198,40,40,0.1));
+  max-height: 72vh;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 64px rgba(0,0,0,0.14)) drop-shadow(0 4px 16px rgba(0,0,0,0.06));
   animation: floatSlow 7s ease-in-out infinite;
 }
 
@@ -284,53 +280,53 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: #fff;
-  border: 1.5px solid #e8e8e8;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1.5px solid #e0e0e0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #333;
+  color: #444;
   transition: all 0.22s ease;
   flex-shrink: 0;
 }
 
 .slideArrow:hover {
-  background: #C62828;
-  border-color: #C62828;
+  background: #1a1a2e;
+  border-color: #1a1a2e;
   color: #fff;
-  box-shadow: 0 6px 24px rgba(198,40,40,0.3);
+  box-shadow: 0 6px 20px rgba(26,26,46,0.25);
   transform: translateY(-50%) scale(1.08);
 }
 
 .slideArrowLeft {
-  left: 1rem;
+  left: 1.2rem;
 }
 
 .slideArrowRight {
-  right: 1rem;
+  right: 1.2rem;
 }
 
-/* ===== DOT INDICATORS ===== */
+/* ===== DOT INDICATORS — centered at bottom ===== */
 .slideDots {
   position: absolute;
-  bottom: 1.8rem;
+  bottom: 1.6rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.5rem;
+  gap: 0.45rem;
   z-index: 10;
 }
 
 .slideDot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
-  background: #ccc;
+  background: rgba(0,0,0,0.18);
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -338,7 +334,7 @@
 }
 
 .slideDotActive {
-  width: 26px;
+  width: 28px;
   background: #C62828;
 }
 
@@ -356,7 +352,7 @@
 
 .slideProgressBar {
   height: 100%;
-  background: linear-gradient(90deg, #C62828, #ff6b6b);
+  background: linear-gradient(90deg, #1a1a2e, #C62828);
   border-radius: 0 2px 2px 0;
 }
 

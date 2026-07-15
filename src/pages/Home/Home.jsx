@@ -77,13 +77,12 @@ const PROMO_BANNERS = [
 const HERO_SLIDES = [
   {
     id: 0,
-    tag: 'Premium Tri-Ply Quality',
-    title: 'Stainless Steel\nCook Pots',
+    tag: 'Stainless Steel',
+    title: 'Classic Finish\nCook Pots',
     subtitle: 'Professional-grade tri-ply construction for even heat distribution. Built to last a lifetime.',
     cta: 'Know More',
     link: '/products/cook-pots',
     image: '/images/products/cook-pots-hero.png',
-    accentColor: '#C62828',
   },
   {
     id: 1,
@@ -93,17 +92,15 @@ const HERO_SLIDES = [
     cta: 'Know More',
     link: '/products/kadai',
     image: '/images/products/kadai-hero.png',
-    accentColor: '#C62828',
   },
   {
     id: 2,
-    tag: 'Non-stick Excellence',
+    tag: 'Mirror Finish Quality',
     title: 'Premium\nFry Pans',
     subtitle: 'Induction compatible fry pans with mirror-finish steel — designed for effortless cooking.',
     cta: 'Know More',
     link: '/products/fry-pan',
     image: '/images/products/fry-pan-hero.png',
-    accentColor: '#C62828',
   },
   {
     id: 3,
@@ -113,7 +110,15 @@ const HERO_SLIDES = [
     cta: 'Know More',
     link: '/products/bottles',
     image: '/images/products/bottle-flasks-hero.png',
-    accentColor: '#C62828',
+  },
+  {
+    id: 4,
+    tag: 'Professional Series',
+    title: 'Sauce Pan\nCollection',
+    subtitle: 'Precision-crafted sauce pans for professional chefs and home cooks. Even heat, every time.',
+    cta: 'Know More',
+    link: '/products/sauce-pan',
+    image: '/images/products/sauce-pan-hero.png',
   },
 ];
 
