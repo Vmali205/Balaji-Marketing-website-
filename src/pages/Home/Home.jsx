@@ -203,10 +203,23 @@ const Home = () => {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Subtle decorative bg */}
-        <div className={styles.heroBg}>
-          <div className={styles.heroDotGrid} />
-          <div className={styles.heroAccentBlob1} />
+        {/* ===== FULLSCREEN BACKGROUND IMAGE ===== */}
+        <div className={styles.heroImageCol}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`img-${currentSlide}`}
+              className={styles.heroImageFrame}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.8 } }}
+              exit={{ opacity: 0, transition: { duration: 0.4 } }}
+            >
+              <img
+                src={slide.image}
+                alt={slide.title.replace('\n', ' ')}
+                className={styles.heroImg}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <div className={styles.heroSliderWrap}>
@@ -220,9 +233,8 @@ const Home = () => {
             <ChevronLeft size={22} />
           </button>
 
-          {/* SLIDE CONTENT */}
+          {/* SLIDE TEXT CONTENT */}
           <div className={styles.heroContent}>
-            {/* LEFT: Text column */}
             <div className={styles.heroTextCol}>
               <AnimatePresence mode="wait" custom={direction}>
                <motion.div
@@ -234,19 +246,14 @@ const Home = () => {
                   animate="center"
                   exit="exit"
                 >
-                  {/* Category tag — e.g. "STAINLESS STEEL" */}
-                  <div className={styles.heroTag}>
-                    {slide.tag}
-                  </div>
+                  <div className={styles.heroTag}>{slide.tag}</div>
 
-                  {/* Giant bold title — the hero centrepiece */}
                   <h1 className={styles.heroTitle}>
                     {slide.title.split('\n').map((line, i) => (
                       <span key={i}>{line}{i < slide.title.split('\n').length - 1 && <br />}</span>
                     ))}
                   </h1>
 
-                  {/* Single CTA button */}
                   <div className={styles.heroActions}>
                     <Link
                       to={slide.link}
@@ -256,29 +263,6 @@ const Home = () => {
                       {slide.cta}
                     </Link>
                   </div>
-                </motion.div>
-              </AnimatePresence>
-
-            </div>
-
-            {/* RIGHT: Image column */}
-            <div className={styles.heroImageCol}>
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={`img-${currentSlide}`}
-                  className={styles.heroImageFrame}
-                  custom={direction}
-                  variants={imageVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                >
-                  <div className={styles.heroImageBg} />
-                  <img
-                    src={slide.image}
-                    alt={slide.title.replace('\n', ' ')}
-                    className={styles.heroImg}
-                  />
                 </motion.div>
               </AnimatePresence>
             </div>
