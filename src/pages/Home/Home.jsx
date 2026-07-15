@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight, Award, Truck, Shield, Users, MessageCircle,
-  Star, Package, ChevronRight, CheckCircle, Zap, Tag,
+  Star, Package, ChevronRight, Tag,
   ChevronLeft
 } from 'lucide-react';
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
@@ -225,7 +225,7 @@ const Home = () => {
             {/* LEFT: Text column */}
             <div className={styles.heroTextCol}>
               <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
+               <motion.div
                   key={`text-${currentSlide}`}
                   className={styles.heroTextInner}
                   custom={direction}
@@ -234,27 +234,19 @@ const Home = () => {
                   animate="center"
                   exit="exit"
                 >
+                  {/* Category tag — e.g. "STAINLESS STEEL" */}
                   <div className={styles.heroTag}>
                     {slide.tag}
                   </div>
 
+                  {/* Giant bold title — the hero centrepiece */}
                   <h1 className={styles.heroTitle}>
                     {slide.title.split('\n').map((line, i) => (
                       <span key={i}>{line}{i < slide.title.split('\n').length - 1 && <br />}</span>
                     ))}
                   </h1>
 
-                  <p className={styles.heroSubtitle}>{slide.subtitle}</p>
-
-                  <div className={styles.heroChecks}>
-                    {['ISI Certified', 'Induction Ready', 'Bulk Pricing'].map((item) => (
-                      <div key={item} className={styles.heroCheck}>
-                        <CheckCircle size={13} />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
+                  {/* Single CTA button */}
                   <div className={styles.heroActions}>
                     <Link
                       to={slide.link}
@@ -262,32 +254,11 @@ const Home = () => {
                       id={`hero-cta-${currentSlide}`}
                     >
                       {slide.cta}
-                      <ArrowRight size={15} />
-                    </Link>
-                    <Link to="/catalogue" className={styles.heroCatalogueBtn} id="hero-catalogue-btn">
-                      View Catalogue
                     </Link>
                   </div>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Stats strip */}
-              <div className={styles.heroStats}>
-                <div className={styles.stat}>
-                  <span className={styles.statNum}><AnimatedCounter target={50} suffix="+" /></span>
-                  <span className={styles.statLabel}>Product SKUs</span>
-                </div>
-                <div className={styles.statDivider} />
-                <div className={styles.stat}>
-                  <span className={styles.statNum}><AnimatedCounter target={500} suffix="+" duration={2500} /></span>
-                  <span className={styles.statLabel}>B2B Partners</span>
-                </div>
-                <div className={styles.statDivider} />
-                <div className={styles.stat}>
-                  <span className={styles.statNum}><AnimatedCounter target={10} suffix="+" duration={1500} /></span>
-                  <span className={styles.statLabel}>Years Exp.</span>
-                </div>
-              </div>
             </div>
 
             {/* RIGHT: Image column */}

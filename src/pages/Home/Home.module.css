@@ -2,64 +2,42 @@
    HOME PAGE — PREMIUM E-COMMERCE DESIGN
    =========================== */
 
-/* ===== HERO SLIDESHOW — muktiindia style ===== */
+/* ===== HERO — exact muktiindia.com style ===== */
 .hero {
   position: relative;
-  min-height: 82vh;
+  min-height: 78vh;
   display: flex;
   flex-direction: column;
   background: #ffffff;
   overflow: hidden;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #ebebeb;
 }
 
-.heroBg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
+/* No decorative background — pure white like reference */
+.heroBg { display: none; }
+.heroDotGrid { display: none; }
+.heroAccentBlob1 { display: none; }
 
-/* Very subtle warm-grey gradient wash — keeps it clean like the reference */
-.heroDotGrid {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 80% at 72% 50%, rgba(198,40,40,0.04) 0%, transparent 70%);
-}
-
-.heroAccentBlob1 {
-  position: absolute;
-  bottom: -10%;
-  right: 20%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(198,40,40,0.055) 0%, transparent 65%);
-  filter: blur(90px);
-  animation: blobPulse 12s ease-in-out infinite;
-}
-
-/* SLIDER WRAPPER */
+/* SLIDER WRAPPER — full width, arrows positioned at edges */
 .heroSliderWrap {
   position: relative;
   flex: 1;
   display: flex;
   align-items: center;
   z-index: 2;
-  padding: 4.5rem 0 5rem;
+  padding: 3.5rem 0 4.5rem;
 }
 
-/* SLIDE CONTENT GRID — text left, image right */
+/* SLIDE CONTENT GRID — text left ~40%, image right ~60% */
 .heroContent {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 3rem;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 0;
   align-items: center;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 5rem;
   width: 100%;
+  max-width: 100%;
+  padding: 0 5rem 0 7rem;
 }
 
 /* TEXT COLUMN */
@@ -67,7 +45,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
+  padding-right: 2rem;
 }
 
 .heroTextInner {
@@ -77,265 +55,167 @@
   width: 100%;
 }
 
-/* Category tag — matches the reference "STAINLESS STEEL" label */
+/* Red category tag — exactly like "STAINLESS STEEL" in reference */
 .heroTag {
-  display: inline-block;
   font-size: 0.7rem;
   font-weight: 700;
   color: #C62828;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: 1.1rem;
+  letter-spacing: 0.22em;
+  margin-bottom: 1rem;
+  display: block;
 }
 
-/* Title — large bold like the reference */
+/* Giant bold title — this IS the hero, exactly like reference */
 .heroTitle {
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
   font-weight: 900;
-  line-height: 1.12;
+  line-height: 1.1;
   letter-spacing: -0.03em;
-  color: #1a1a1a;
-  margin-bottom: 1.2rem;
-}
-
-.heroTitleAccent {
-  color: #C62828;
-}
-
-/* Subtitle — minimal, concise */
-.heroSubtitle {
-  font-size: 0.96rem;
-  line-height: 1.7;
-  color: #666;
-  margin-bottom: 2rem;
-  max-width: 420px;
-  font-weight: 400;
-}
-
-/* Feature pills */
-.heroChecks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
+  color: #111111;
   margin-bottom: 2.4rem;
 }
 
-.heroCheck {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: #444;
-  background: #f7f7f7;
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid #e5e5e5;
-}
+.heroTitleAccent { color: #C62828; }
 
-.heroCheck svg {
-  color: #C62828;
-  flex-shrink: 0;
-}
+/* Hidden in reference — keeping for legacy compat but visually hidden */
+.heroSubtitle { display: none; }
+.heroChecks   { display: none; }
+.heroStats    { display: none; }
+.stat         { display: none; }
+.statNum      { display: none; }
+.statLabel    { display: none; }
+.statDivider  { display: none; }
 
-/* Action buttons */
+/* Action buttons row */
 .heroActions {
   display: flex;
-  gap: 0.9rem;
+  gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 0;
 }
 
-/* Primary CTA — dark navy pill matching the reference */
+/* KNOW MORE — dark navy pill, exact match to reference */
 .heroKnowMoreBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.82rem 2.1rem;
+  padding: 0.8rem 2.2rem;
   background: #1a1a2e;
   color: #fff;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   border-radius: 50px;
   text-decoration: none;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 24px rgba(26,26,46,0.22);
+  transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 4px 18px rgba(26,26,46,0.2);
 }
-
 .heroKnowMoreBtn:hover {
   background: #C62828;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(198,40,40,0.35);
+  box-shadow: 0 8px 26px rgba(198,40,40,0.3);
   color: #fff;
 }
 
-/* Secondary CTA */
-.heroCatalogueBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.82rem 1.6rem;
-  background: transparent;
-  color: #333;
-  font-size: 0.82rem;
-  font-weight: 600;
-  border-radius: 50px;
-  text-decoration: none;
-  border: 1.5px solid #d0d0d0;
-  transition: all 0.25s ease;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+/* Catalogue btn — hidden to match reference (single button only) */
+.heroCatalogueBtn { display: none; }
 
-.heroCatalogueBtn:hover {
-  border-color: #C62828;
-  color: #C62828;
-  background: rgba(198,40,40,0.04);
-}
-
-/* Stats strip — sits below buttons */
-.heroStats {
-  display: flex;
-  gap: 2.2rem;
-  align-items: center;
-  padding-top: 2rem;
-  margin-top: 2rem;
-  border-top: 1px solid #ebebeb;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.18rem;
-}
-
-.statNum {
-  font-family: var(--font-heading);
-  font-size: 1.85rem;
-  font-weight: 900;
-  color: #1a1a1a;
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.statLabel {
-  font-size: 0.66rem;
-  font-weight: 600;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.statDivider {
-  width: 1px;
-  height: 34px;
-  background: #e5e5e5;
-}
-
-/* IMAGE COLUMN — large, centred product image like the reference */
+/* IMAGE COLUMN — large product, close to right edge like reference */
 .heroImageCol {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   position: relative;
-  padding: 2rem 0;
+  padding-right: 0;
+  overflow: visible;
 }
 
 .heroImageFrame {
   position: relative;
   width: 100%;
-  max-width: 560px;
+  max-width: 640px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Soft circular glow behind the product */
+/* Very subtle light glow behind product, barely visible */
 .heroImageBg {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 80% at 50% 55%, rgba(198,40,40,0.06) 0%, rgba(245,245,245,0.9) 55%, transparent 80%);
+  inset: 10%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(220,220,220,0.4) 0%, transparent 70%);
   border-radius: 50%;
   z-index: 0;
-  filter: blur(40px);
-  animation: blobPulse 8s ease-in-out infinite;
+  filter: blur(50px);
 }
 
+/* Product image — large, clean drop shadow only, no tint */
 .heroImg {
   position: relative;
   z-index: 1;
   width: 100%;
   height: auto;
-  max-height: 72vh;
+  max-height: 68vh;
   object-fit: contain;
-  filter: drop-shadow(0 24px 64px rgba(0,0,0,0.14)) drop-shadow(0 4px 16px rgba(0,0,0,0.06));
+  filter: drop-shadow(0 16px 48px rgba(0,0,0,0.13));
   animation: floatSlow 7s ease-in-out infinite;
 }
 
-/* ===== SLIDE NAVIGATION ARROWS ===== */
+/* ===== SLIDE ARROWS — at the very edges of the section ===== */
 .slideArrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: #fff;
-  border: 1.5px solid #e0e0e0;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: #444;
-  transition: all 0.22s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
 }
-
 .slideArrow:hover {
   background: #1a1a2e;
   border-color: #1a1a2e;
   color: #fff;
-  box-shadow: 0 6px 20px rgba(26,26,46,0.25);
+  box-shadow: 0 4px 16px rgba(26,26,46,0.22);
   transform: translateY(-50%) scale(1.08);
 }
+.slideArrowLeft  { left: 1rem; }
+.slideArrowRight { right: 1rem; }
 
-.slideArrowLeft {
-  left: 1.2rem;
-}
-
-.slideArrowRight {
-  right: 1.2rem;
-}
-
-/* ===== DOT INDICATORS — centered at bottom ===== */
+/* ===== DOT INDICATORS — simple like reference ===== */
 .slideDots {
   position: absolute;
-  bottom: 1.6rem;
+  bottom: 1.4rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.45rem;
+  gap: 0.4rem;
   z-index: 10;
 }
-
 .slideDot {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.18);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.28s ease;
   padding: 0;
 }
-
 .slideDotActive {
-  width: 28px;
   background: #C62828;
+  width: 24px;
+  border-radius: 4px;
 }
 
 /* ===== PROGRESS BAR ===== */
@@ -344,15 +224,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 2px;
   background: #f0f0f0;
   z-index: 10;
   overflow: hidden;
 }
-
 .slideProgressBar {
   height: 100%;
-  background: linear-gradient(90deg, #1a1a2e, #C62828);
+  background: #C62828;
   border-radius: 0 2px 2px 0;
 }
 
