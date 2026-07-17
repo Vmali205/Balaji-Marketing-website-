@@ -29,7 +29,7 @@ const Logo = ({ size = 'default', showText = true, variant = 'dark' }) => {
         </defs>
         {/* Outer ring */}
         <circle cx="60" cy="60" r="56" stroke="url(#logoAccent)" strokeWidth="2.5" fill="none" />
-        <circle cx="60" cy="60" r="50" fill={isLight ? "transparent" : "url(#logoPrimary)"} />
+        <circle cx="60" cy="60" r="50" fill="transparent" />
         
         {/* Stylized cookware/pot silhouette */}
         <ellipse cx="60" cy="68" rx="28" ry="12" fill="none" stroke="url(#logoAccent)" strokeWidth="2.5" />
@@ -67,7 +67,7 @@ const Logo = ({ size = 'default', showText = true, variant = 'dark' }) => {
               fontFamily: "'Inter', sans-serif",
               fontWeight: 600,
               fontSize: size === 'large' ? '0.65rem' : size === 'small' ? '0.45rem' : '0.55rem',
-              color: '#F97316',
+              color: '#FFFFFF',
               letterSpacing: '0.25em',
               textTransform: 'uppercase',
             }}
