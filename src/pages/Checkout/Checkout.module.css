@@ -579,7 +579,7 @@
     flex-direction: column;
   }
 
-  .navButtons .btn {
+  .navButtons button {
     width: 100%;
     justify-content: center;
     margin-left: 0 !important;
