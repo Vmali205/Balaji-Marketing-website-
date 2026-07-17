@@ -832,6 +832,12 @@
 @media (max-width: 900px) {
   .heroSliderWrap {
     padding: 4rem 0 3.5rem;
+    background: linear-gradient(
+      105deg,
+      rgba(10, 10, 20, 0.85) 0%,
+      rgba(10, 10, 20, 0.70) 50%,
+      rgba(10, 10, 20, 0.20) 100%
+    );
   }
 
   .heroContent {
@@ -839,6 +845,7 @@
     gap: 2.5rem;
     padding: 0 3.5rem;
     text-align: center;
+    max-width: 100%;
   }
 
   .heroTextCol {
@@ -858,10 +865,23 @@
     display: none;
   }
 
+  /* Keep background image visible on tablets too */
   .heroImageCol {
-    order: 0;
-    max-width: 360px;
-    margin: 0 auto;
+    position: absolute;
+    inset: 0;
+    display: block !important;
+    max-width: unset;
+    margin: 0;
+  }
+
+  .heroImageFrame {
+    width: 100%;
+    height: 100%;
+    max-width: unset;
+  }
+
+  .heroImg {
+    object-position: 65% center;
   }
 
   .heroSubtitle {
@@ -874,8 +894,8 @@
     justify-content: center;
   }
 
-  .heroImageFrame {
-    max-width: 320px;
+  .heroActions {
+    justify-content: center;
   }
 
   .catGrid {
@@ -902,28 +922,69 @@
 
 @media (max-width: 640px) {
   .hero {
-    min-height: 80vh;
+    min-height: 100svh;
   }
 
+  /* ===== MOBILE: Keep image visible as full background ===== */
+  .heroImageCol {
+    position: absolute;
+    inset: 0;
+    display: block !important;
+    z-index: 0;
+  }
+
+  .heroImageFrame {
+    width: 100%;
+    height: 100%;
+    max-width: unset;
+  }
+
+  .heroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* Stronger overlay on mobile for text legibility */
   .heroSliderWrap {
-    padding: 3rem 0 3rem;
+    padding: 5rem 0 4rem;
+    background: linear-gradient(
+      180deg,
+      rgba(5, 5, 15, 0.55) 0%,
+      rgba(5, 5, 15, 0.75) 40%,
+      rgba(5, 5, 15, 0.88) 100%
+    );
   }
 
   .heroContent {
-    padding: 0 3rem;
-    gap: 1.5rem;
+    padding: 0 1.5rem;
+    gap: 1.2rem;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
-  .heroImageCol {
-    display: none;
+  .heroTextInner {
+    align-items: center;
   }
 
   .heroTitle {
     font-size: clamp(2rem, 9vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 2rem;
   }
 
-  .slideArrowLeft { left: 0.25rem; }
-  .slideArrowRight { right: 0.25rem; }
+  .heroTag {
+    text-align: center;
+  }
+
+  .heroActions {
+    justify-content: center;
+  }
+
+  .slideArrowLeft { left: 0.5rem; }
+  .slideArrowRight { right: 0.5rem; }
 
   .heroStats {
     gap: 1.5rem;
