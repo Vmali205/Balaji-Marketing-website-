@@ -19,8 +19,8 @@ const Logo = ({ size = 'default', showText = true, variant = 'dark' }) => {
             <stop offset="100%" stopColor="#1A1A1A" />
           </linearGradient>
           <linearGradient id="logoAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#D32F2F" />
-            <stop offset="100%" stopColor="#B71C1C" />
+            <stop offset="0%" stopColor="#F97316" />
+            <stop offset="100%" stopColor="#EA580C" />
           </linearGradient>
           <linearGradient id="logoCopper" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#C87533" />
@@ -55,7 +55,7 @@ const Logo = ({ size = 'default', showText = true, variant = 'dark' }) => {
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 800,
               fontSize: size === 'large' ? '1.5rem' : size === 'small' ? '0.9rem' : '1.2rem',
-              color: isLight ? '#F5F5F5' : '#2B2B2B',
+              color: '#FFFFFF',
               letterSpacing: '0.05em',
               textTransform: 'uppercase'
             }}
@@ -67,7 +67,7 @@ const Logo = ({ size = 'default', showText = true, variant = 'dark' }) => {
               fontFamily: "'Inter', sans-serif",
               fontWeight: 600,
               fontSize: size === 'large' ? '0.65rem' : size === 'small' ? '0.45rem' : '0.55rem',
-              color: '#D32F2F',
+              color: '#F97316',
               letterSpacing: '0.25em',
               textTransform: 'uppercase',
             }}
