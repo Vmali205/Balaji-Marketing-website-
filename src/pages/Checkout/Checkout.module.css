@@ -206,8 +206,8 @@
 
 .paymentSelected {
   border-color: var(--color-primary);
-  background: rgba(211, 47, 47, 0.025);
-  box-shadow: 0 0 0 3px rgba(211,47,47,0.08), var(--shadow-sm);
+  background: rgba(249, 115, 22, 0.025);
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.08), var(--shadow-sm);
 }
 
 /* Razorpay Option */
@@ -286,7 +286,7 @@
 
 .paymentSelected .paymentMethodChip {
   background: var(--color-primary-subtle);
-  border-color: rgba(211,47,47,0.2);
+  border-color: rgba(249,115,22,0.2);
   color: var(--color-primary);
 }
 
@@ -517,7 +517,7 @@
   padding: 0.6rem;
   background: var(--color-primary-subtle);
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(211,47,47,0.1);
+  border: 1px solid rgba(249,115,22,0.1);
 }
 
 /* ===== TRUST SECTION ===== */

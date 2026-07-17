@@ -8,7 +8,7 @@
   min-height: 88vh;
   display: flex;
   flex-direction: column;
-  background: #111;
+  background: #0F172A;
   overflow: hidden;
   border-bottom: none;
 }
@@ -90,7 +90,7 @@
 .heroTag {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #ff6b6b;
+  color: #F97316;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   margin-bottom: 1.1rem;
@@ -108,7 +108,7 @@
   text-shadow: 0 2px 24px rgba(0,0,0,0.3);
 }
 
-.heroTitleAccent { color: #ff8a80; }
+.heroTitleAccent { color: #FB923C; }
 
 /* Hidden elements */
 .heroSubtitle { display: none; }
@@ -145,10 +145,10 @@
   box-shadow: 0 6px 24px rgba(0,0,0,0.25);
 }
 .heroKnowMoreBtn:hover {
-  background: #C62828;
+  background: #F97316;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(198,40,40,0.4);
+  box-shadow: 0 10px 32px rgba(249,115,22,0.4);
 }
 
 /* ===== SLIDE ARROWS ===== */
@@ -201,7 +201,7 @@
   padding: 0;
 }
 .slideDotActive {
-  background: #fff;
+  background: #F97316;
   width: 26px;
   border-radius: 4px;
 }
@@ -219,7 +219,7 @@
 }
 .slideProgressBar {
   height: 100%;
-  background: linear-gradient(90deg, #fff, #C62828);
+  background: linear-gradient(90deg, #F97316, #EA580C);
   border-radius: 0 2px 2px 0;
 }
 
@@ -321,7 +321,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: rgba(211,47,47,0.90);
+  background: rgba(249,115,22,0.90);
   color: #fff;
   font-size: 0.9rem;
   font-weight: 800;
@@ -340,7 +340,7 @@
 .catCard:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
-  border-color: rgba(211,47,47,0.2);
+  border-color: rgba(249,115,22,0.2);
 }
 
 .catCard:hover .catImage {
@@ -487,7 +487,7 @@
   transform: translateX(-50%);
   width: 800px;
   height: 400px;
-  background: radial-gradient(ellipse, rgba(211,47,47,0.04) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(249,115,22,0.04) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -527,7 +527,7 @@
 }
 
 .whyCard:hover {
-  border-color: rgba(211,47,47,0.15);
+  border-color: rgba(249,115,22,0.15);
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
 }
@@ -537,7 +537,7 @@
   height: 58px;
   border-radius: var(--radius-lg);
   background: var(--color-primary-subtle);
-  border: 1px solid rgba(211,47,47,0.14);
+  border: 1px solid rgba(249,115,22,0.14);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -605,7 +605,7 @@
 }
 
 .testimonialCard:hover {
-  border-color: rgba(211,47,47,0.18);
+  border-color: rgba(249,115,22,0.18);
   box-shadow: var(--shadow-lg);
   transform: translateY(-5px);
 }
@@ -682,7 +682,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(211,47,47,0.22) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(249,115,22,0.22) 0%, transparent 65%);
   filter: blur(100px);
   animation: blobPulse 8s ease-in-out infinite;
 }
@@ -720,8 +720,8 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.45rem 1.1rem;
-  background: rgba(211,47,47,0.18);
-  border: 1px solid rgba(211,47,47,0.35);
+  background: rgba(249,115,22,0.18);
+  border: 1px solid rgba(249,115,22,0.35);
   border-radius: var(--radius-full);
   font-size: 0.7rem;
   font-weight: 800;

@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, MessageCircle, ShoppingBag, ExternalLink 
 import useProducts from '../../hooks/useProducts';
 import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader';
 import { CATEGORIES, WHATSAPP_LINK } from '../../utils/constants';
 import styles from './CategoryPage.module.css';
 
@@ -148,8 +149,8 @@ const CategoryPage = () => {
           </AnimatedSection>
 
           {loading ? (
-            <div className="page-loader">
-              <div className="spinner" />
+            <div className={styles.productsGrid}>
+              <SkeletonLoader count={6} type="product-card" />
             </div>
           ) : categoryProducts.length > 0 ? (
             <div className={styles.productsGrid}>

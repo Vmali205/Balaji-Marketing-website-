@@ -10,6 +10,7 @@ import AnimatedSection from '../../components/AnimatedSection/AnimatedSection';
 import AnimatedCounter from '../../components/AnimatedCounter/AnimatedCounter';
 import Marquee from '../../components/Marquee/Marquee';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader';
 import useProducts from '../../hooks/useProducts';
 import { CATEGORIES, WHATSAPP_LINK, TESTIMONIALS } from '../../utils/constants';
 import styles from './Home.module.css';
@@ -57,8 +58,8 @@ const PROMO_BANNERS = [
     cta: 'Shop Now',
     link: '/products/kadai',
     image: '/images/products/kadai-hero.png',
-    bg: 'linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%)',
-    accent: '#C62828',
+    bg: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+    accent: '#F97316',
   },
   {
     id: 'sale',
@@ -68,8 +69,8 @@ const PROMO_BANNERS = [
     cta: 'Explore Deals',
     link: '/products/fry-pan',
     image: '/images/products/fry-pan-hero.png',
-    bg: 'linear-gradient(135deg, #8B0000 0%, #C62828 100%)',
-    accent: '#FFE082',
+    bg: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)',
+    accent: '#D4AF37',
   },
 ];
 
@@ -392,8 +393,8 @@ const Home = () => {
           </AnimatedSection>
 
           {productsLoading ? (
-            <div className="page-loader" style={{ height: '220px' }}>
-              <div className="spinner" />
+            <div className={styles.featuredGrid}>
+              <SkeletonLoader count={4} type="product-card" />
             </div>
           ) : (
             <div className={styles.featuredGrid}>

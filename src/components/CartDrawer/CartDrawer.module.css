@@ -86,9 +86,9 @@
 }
 
 .closeBtn:hover {
-  background: rgba(211,47,47,0.08);
+  background: rgba(249,115,22,0.08);
   color: var(--color-primary);
-  border-color: rgba(211,47,47,0.2);
+  border-color: rgba(249,115,22,0.2);
 }
 
 /* ===== EMPTY STATE ===== */
@@ -278,7 +278,7 @@
 
 .removeBtn:hover {
   color: var(--color-error);
-  background: rgba(211,47,47,0.08);
+  background: rgba(249,115,22,0.08);
 }
 
 /* ===== SUMMARY ===== */
@@ -324,9 +324,9 @@
   text-align: center;
   margin: 0.4rem 0;
   padding: 0.5rem;
-  background: rgba(211,47,47,0.04);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(211,47,47,0.08);
+  background: rgba(249,115,22,0.04);
+  color: var(--color-primary);
+  border: 1px solid rgba(249,115,22,0.08);
 }
 
 /* ===== PAYMENT PREVIEW ===== */

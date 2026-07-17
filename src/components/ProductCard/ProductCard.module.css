@@ -16,11 +16,11 @@
 
 .card:hover {
   transform: translateY(-8px);
-  border-color: rgba(211, 47, 47, 0.18);
+  border-color: rgba(249, 115, 22, 0.22);
   box-shadow:
-    0 2px 8px rgba(0,0,0,0.04),
-    0 16px 56px rgba(0,0,0,0.10),
-    0 0 0 1px rgba(211,47,47,0.06);
+    0 2px 8px rgba(0,0,0,0.15),
+    0 16px 56px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(249,115,22,0.08);
 }
 
 /* ===== IMAGE AREA ===== */
@@ -29,7 +29,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
   display: block;
 }
 
@@ -82,8 +82,8 @@
 }
 
 .card:hover .categoryBadge {
-  background: rgba(211, 47, 47, 0.88);
-  border-color: rgba(211, 47, 47, 0.4);
+  background: rgba(249, 115, 22, 0.88);
+  border-color: rgba(249, 115, 22, 0.4);
 }
 
 .discountBadge {
@@ -98,7 +98,7 @@
   font-weight: 800;
   letter-spacing: 0.05em;
   z-index: 3;
-  box-shadow: 0 4px 12px rgba(211,47,47,0.4);
+  box-shadow: 0 4px 12px rgba(249,115,22,0.4);
 }
 
 /* ===== QUICK ACTIONS HOVER OVERLAY ===== */
@@ -126,13 +126,13 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.96);
+  background: rgba(30, 41, 59, 0.90);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(0,0,0,0.06);
-  color: var(--color-text-primary);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #FFFFFF;
   cursor: pointer;
   transition: all 0.22s ease;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.30);
 }
 
 .quickBtn:hover {
@@ -140,7 +140,7 @@
   color: #fff;
   border-color: transparent;
   transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(211,47,47,0.4);
+  box-shadow: 0 4px 16px rgba(249,115,22,0.4);
 }
 
 /* ===== STAR RATING ===== */
@@ -245,7 +245,7 @@
 }
 
 .card:hover .sizeChip {
-  border-color: rgba(211,47,47,0.22);
+  border-color: rgba(249,115,22,0.22);
   color: var(--color-primary);
 }
 
