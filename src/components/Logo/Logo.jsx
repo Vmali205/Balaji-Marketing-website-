@@ -1,3 +1,4 @@
+/* Logo component — BALAJI & Marketing Vasai text forced to white (#FFFFFF) */
 const Logo = ({ size = 'default', showText = true, variant = 'dark' }) => {
   const heights = { small: 32, default: 40, large: 52 };
   const h = heights[size] || heights.default;
