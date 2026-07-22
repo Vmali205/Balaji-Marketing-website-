@@ -87,7 +87,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link to="/" aria-label="Balaji Marketing Home" className={styles.logoLink}>
-            <Logo size="default" variant="dark" />
+            <Logo size="default" variant="light" />
           </Link>
 
           {/* Desktop Navigation */}

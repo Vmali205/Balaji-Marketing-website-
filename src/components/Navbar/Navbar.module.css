@@ -121,6 +121,15 @@
 
 .logoLink {
   flex-shrink: 0;
+  color: #FFFFFF !important;
+}
+
+.logoLink span {
+  color: #FFFFFF !important;
+}
+
+.logoLink svg {
+  color: #FFFFFF;
 }
 
 /* ===== DESKTOP NAV LINKS ===== */
