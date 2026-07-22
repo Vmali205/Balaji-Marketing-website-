@@ -51,26 +51,40 @@ const WHY_ITEMS = [
 
 const PROMO_BANNERS = [
   {
-    id: 'new-arrivals',
-    label: 'New In Collection',
-    title: 'Tri-Ply Kadai',
-    subtitle: 'Professional Series',
+    id: 'cooking-pot-sale',
+    label: 'Sale Up To 40%',
+    title: 'Most Cooking Pot',
+    subtitle: 'Blue color',
     cta: 'Shop Now',
-    link: '/products/kadai',
-    image: '/images/products/kadai-hero.png',
-    bg: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-    accent: '#F97316',
+    link: '/products/cook-pots',
+    image: '/images/products/promo-cooking-pot.png',
+    bg: 'linear-gradient(135deg, #3D7C3F 0%, #2D5E2F 50%, #4A9A4D 100%)',
+    accent: '#FFD700',
+    theme: 'green',
   },
   {
-    id: 'sale',
-    label: 'Up to 20% OFF',
-    title: 'Cooking Made Easy',
-    subtitle: 'Fry Pans & Woks',
-    cta: 'Explore Deals',
-    link: '/products/fry-pan',
-    image: '/images/products/fry-pan-hero.png',
-    bg: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)',
-    accent: '#D4AF37',
+    id: 'knife-arrival',
+    label: 'New Arrival',
+    title: '10% Off the Bill',
+    subtitle: 'Knife',
+    cta: 'Shop Now',
+    link: '/products',
+    image: '/images/products/promo-knife.png',
+    bg: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #111111 100%)',
+    accent: '#A8D84F',
+    theme: 'dark',
+  },
+  {
+    id: 'sauce-pan-offer',
+    label: 'Popular Offer',
+    title: 'Kitchen Microwave',
+    subtitle: '₹2,400.00',
+    cta: 'Shop Now',
+    link: '/products/sauce-pan',
+    image: '/images/products/promo-sauce-pan.png',
+    bg: 'linear-gradient(135deg, #C4612A 0%, #A84E1F 50%, #D97642 100%)',
+    accent: '#FFD700',
+    theme: 'orange',
   },
 ];
 
@@ -349,21 +363,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ===== PROMO BANNERS ===== */}
+      {/* ===== PROMO BANNERS — 3 CARD LAYOUT ===== */}
       <section className={`section ${styles.promoBanners}`} id="promo-banners">
         <div className="container">
           <div className={styles.promoBannerGrid}>
             {PROMO_BANNERS.map((banner, index) => (
-              <AnimatedSection key={banner.id} variant={index === 0 ? 'slideRight' : 'slideLeft'}>
-                <Link to={banner.link} className={styles.promoBannerCard} id={`promo-${banner.id}`}>
+              <AnimatedSection key={banner.id} variant="slideUp" delay={index * 0.1}>
+                <Link to={banner.link} className={`${styles.promoBannerCard} ${styles[`promoTheme_${banner.theme}`] || ''}`} id={`promo-${banner.id}`}>
                   <div className={styles.promoBannerBg} style={{ background: banner.bg }} />
                   <div className={styles.promoBannerContent}>
-                    <span className={styles.promoBannerLabel} style={{ color: banner.accent }}>
+                    <span className={styles.promoBadge} style={{ background: banner.accent, color: '#1a1a1a' }}>
                       {banner.label}
                     </span>
                     <h3 className={styles.promoBannerTitle}>{banner.title}</h3>
-                    <p className={styles.promoBannerSubtitle}>{banner.subtitle}</p>
-                    <div className={styles.promoBannerCta}>
+                    <p className={styles.promoBannerSubtitle}>
+                      <strong>{banner.subtitle}</strong>
+                    </p>
+                    <div className={styles.promoShopBtn}>
                       <span>{banner.cta}</span>
                       <ArrowRight size={14} />
                     </div>
