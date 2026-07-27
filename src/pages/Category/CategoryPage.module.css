@@ -30,10 +30,10 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.7) 40%,
-    rgba(255, 255, 255, 0.3) 70%,
-    rgba(255, 255, 255, 0.15) 100%
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.50) 40%,
+    rgba(0, 0, 0, 0.25) 70%,
+    rgba(0, 0, 0, 0.15) 100%
   );
 }
 
@@ -65,16 +65,18 @@
   font-weight: 800;
   line-height: 1.05;
   margin-bottom: 1.5rem;
-  color: var(--color-text-primary);
+  color: #ffffff;
   max-width: 700px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .heroDescription {
   font-size: 1.15rem;
   line-height: 1.8;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 600px;
   margin-bottom: 2.5rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 .heroActions {
